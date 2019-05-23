@@ -1,6 +1,6 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/php/controlador/autenticacion.php';
+//require $_SERVER['DOCUMENT_ROOT'].'/php/controlador/autenticacion.php';
 
 ?>
 
