@@ -102,14 +102,15 @@
 
                   <div class="row">
                     <div class="col-md-3">
-                      <span class="input-group-addon">CONTRASEÑA</span>
+                      <span class="input-group-addon">CONTRASE&Ntilde;A</span>
                     </div>
                     <div class="col-md-6">
                       <input type="password" class="form-control" name="consigna" placeholder="Ingresa tu contraseña">
                     </div>
                   <div class="col-md-3"></div>
                   <div class="intro-button mx-auto" style="margin-top:15px">
-                    <input type="submit" value="Ingresar" class="btn btn-success btn-x2" />
+                    <a href="agenda.php"><input type="button" value="Ingresar" class="btn btn-success btn-x2" /><a/>
+                    <!--<input type="submit" value="Ingresar" class="btn btn-success btn-x2" />-->
                   </div>
 
                 </form>
