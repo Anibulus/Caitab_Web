@@ -112,7 +112,9 @@
                   <div class="col-md-3"></div>
                   <div class="intro-button mx-auto" style="margin-top:15px">
                     <a href="agenda.php"><input type="button" value="Ingresar" class="btn btn-success btn-x2" onclick="camposVacios()"/><a/>
-                    <!--<input type="submit" value="Ingresar" class="btn btn-success btn-x2" />-->
+                    <!--<input type="submit" value="Ingresar" class="btn btn-success btn-x2" />
+                    Es necesario reenviar a una validacion de iniciar sesion
+                  -->
                   </div>
 
                 </form>
