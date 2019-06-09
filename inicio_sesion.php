@@ -2,6 +2,7 @@
 
 //require $_SERVER['DOCUMENT_ROOT'].'/php/controlador/autenticacion.php';
 
+
 ?>
 
 <!DOCTYPE html>
@@ -13,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script type="text/javascript" src="js/validarCampos.js"></script><!--Esta linea ayudara a la validaciones de los campos-->
 
     <title>CAITAB A.C.</title>
 
@@ -109,7 +111,7 @@
                     </div>
                   <div class="col-md-3"></div>
                   <div class="intro-button mx-auto" style="margin-top:15px">
-                    <a href="agenda.php"><input type="button" value="Ingresar" class="btn btn-success btn-x2" /><a/>
+                    <a href="agenda.php"><input type="button" value="Ingresar" class="btn btn-success btn-x2" onclick="camposVacios()"/><a/>
                     <!--<input type="submit" value="Ingresar" class="btn btn-success btn-x2" />-->
                   </div>
 
