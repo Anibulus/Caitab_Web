@@ -152,7 +152,7 @@ class Empleado {
   		return $resultado;//Retorna el valor que contiene la variable
     }//Fin de la consulta individual
 
-    public function nuevoEmpleado() {\
+    public function nuevoEmpleado() {
       $insercion=false;
       $conexion = new Conexion();//Preguntar por procedimientos almacenados para inserciones y modificaciones
       $consulta = $conexion->prepare("insert into Empleado (Nombre_E,Apellidos_E,Domicilio_E,Especialidad_Puesto,Fecha_Nac_E,Turno,Telefono_E,Telefono_Eme_E,Estatus_E,Email_E,ID_Usuario) values (:nom,:app,:dom,:fec,:pue,:tur,:tel,:telE,:est,:ema,:idU)");//Preguntar por procedimientos almacenados
@@ -168,13 +168,52 @@ class Empleado {
       $consulta->bindParam(':ema', $this->email);
       $consulta->bindParam(':idU', $this->idUsuario);
       $consulta->execute();//Despues de llenar la consulta de los datos correctos, la ejecuta
-      if($consulta->fetch()>0){//Si afecto filas,inserto y se valida directamente en el IF
-        return true;
+      if($consulta->rowCount()>0){//Si afecto filas,inserto y se valida directamente en el IF
+        $insercion true;
         echo "Se inserto correctamente";
       }else{
         echo "Ocurrio un error al insertar";
       }
       unset($conexion);
+      return $insercion;
     }//Termina la funcion de insertar a la base de datos
 
-    //Falta modificar y eliminar empleado
+    public function modificarEmpleado($id){
+      $modificar = false;
+      $conexion = new Conexion();
+      $consulta = $conexion->prepare("update Empleado set Nombre_E=:nom, Apellidos_E=:app, Domicilio_E=:dom, Especialidad_Puesto=:pue, Fecha_Nac_E=:fec, Turno=:tur, Telefono_E=:tel, Telefono_Eme_E=:telE, Estatus_E=:est,Email_E=:ema where ID_Empleado=:id");
+      $consulta->bindParam(':nom', $this->nombre);
+      $consulta->bindParam(':app', $this->apellido);
+      $consulta->bindParam(':dom', $this->domicilio);
+      $consulta->bindParam(':fec', $this->fechaNac);
+      $consulta->bindParam(':pue', $this->puesto);
+      $consulta->bindParam(':tur', $this->turno);
+      $consulta->bindParam(':tel', $this->telefono);
+      $consulta->bindParam(':telE', $this->telefonoEme);
+      $consulta->bindParam(':est', $this->estatus);
+      $consulta->bindParam(':ema', $this->email);
+      $consulta->bindParam(':id', $id);
+      $consulta->excecute();
+      if($consulta->rowCount()>0){//Ejecuta el query y al afectar entra en el IF
+        $modificar=true;
+        echo "Se ha modificado correctamente le registro";
+      }else{
+        echo "No se ha podido modificar correctamente";
+      }
+      unset($conexion);
+      return $modificar;
+    }//aqui termina la funcion de modificar empleado
+
+    public function eliminarEmpleado($id){//Unicamente se puede borrar por ID
+      $eliminar=false;//Esta variable cambiara en el caso de que si se halla modificado el registro
+      $conexion=new Conexion();//Se crea la conexion
+      $consulta=$conexion->prepare("update Empleado set Estatus_E='Inactivo' where ID_Emplado=:id");//prepara la sentencia
+      $consulta=bindParam(':id', $id);//Ingresa la variable en la sentencia
+      $consulta->excecute();//Ejecuta la sentencia en la base de datos
+      if($consulta->rowCount()>0){//SI hay filas afectadas entrara en el if
+        $eliminar=true;
+        echo "Se ha eliminado coorrectamente";
+      }else{
+        echo "No se ha podido eliminar";
+      }
+    }//Fin de la funcion de eliminar
