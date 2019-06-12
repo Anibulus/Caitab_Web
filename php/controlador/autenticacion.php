@@ -11,11 +11,10 @@ var_dump($empleado); //Esto es para verificar que datos contiene
 
 if($empleado){
   //echo "Bienvenido al sistema ".$empleado->getNomEmpleado();
-    $_SESSION['numEmpleado']=$empleado->getNumEmpleado();
-    $_SESSION['nomEmpleado']=$empleado->getNomEmpleado();
-    $_SESSION['puesto']=$empleado->getPuesto();
-    $_SESSION['usuario']=$empleado->getUsuario();
-    header("location:gestion-e.php"); //Aun no la creo
+    $_SESSION['usuario']="Soy un coso raro";
+    $_SESSION['contrasena']=$empleado->getNombre());
+    var_dump($_SESSION);
+    header("old-caitab-web/index.html");
   }
   else{
     echo 'Usuario ó contraseña incorrectos';
@@ -27,39 +26,5 @@ if($empleado){
     header("location:IniciarSesion.html");
   }
 unset($empleado);
-
-
 //aqui termina mi wea
-if(isset($_POST["usuario"]) && isset($_POST["consigna"])) {
-
-    $cuenta = (new CuentaEmpleado(null, null, $_POST["usuario"], $_POST["consigna"]))
-        ->autenticar();
-
-    if(is_null($cuenta)) {
-
-        echo "<script> alert('Usuario inválido') </script>";
-        header( "refresh:1;url=../../../inicio_sesion.php" );
-
-    } else {
-
-        $empleado = (new Empleado(null, null, null, null, null))
-            ->consultar1($cuenta->getIdEmpleado());
-
-        session_start();
-        $_SESSION["CuentaEmpleado"] = $cuenta;
-        $_SESSION["Empleado"] = $empleado;
-
-        switch($empleado->getCargo()) {
-            /* case "Gerente":
-            case "Supervisor":
-            case "Contador":
-                header("Location: ../../../menuEmpleado.php");
-                break; */
-            default: header("Location: ../../../carrito_compras.php");
-                break;
-        }
-    }
-
-}
-
 ?>
