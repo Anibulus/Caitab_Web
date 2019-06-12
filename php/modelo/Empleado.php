@@ -131,6 +131,20 @@ class Empleado {
     }
 
     //Aqui estan las funciones que se conectan con la base de datos
+
+    public function validarInicio($usu,$pass){
+      $registro=null;
+      $conexion = new Conexion();
+      $consulta = $conexion->prepare("select * from Usuarios where Usuario=:usu and Contrasenia=:pass");
+      $consulta->bindParam(':usu',$usu);
+      $consulta->bindParam('pass',$pass)
+      $consulta->excecute();
+      $registro=$consulta->fetch():
+      if($registro){
+        $resultado = new self($registro['Usuario'], $registro['Contrasenia']);
+      }
+    }//Aqui termina validar inicio de sesion
+
     public static function consultaIndividual($id, $nombre) {
       $conexion = new Conexion();
       $consulta = $conexion-> prepare("select * from Empleado where ID_Empleado =:id or Nombre_E =:nom");
