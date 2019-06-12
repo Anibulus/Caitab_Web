@@ -1,7 +1,6 @@
 <?php
 
-class Conexion extends PDO
-{
+class Conexion extends PDO{
 	//Caracteristicas de la clase con los valosres para entrar a la base de datos
 	private $tipo_de_base ='mysql';
 	private $host = 'localhost';
