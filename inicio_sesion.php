@@ -1,7 +1,7 @@
 <?php
 
 //require $_SERVER['DOCUMENT_ROOT'].'/php/controlador/autenticacion.php';
-require_once 'php/controlador/autenticacion.php';
+require_once 'php/autenticacion.php';
 
 ?>
 
@@ -90,13 +90,13 @@ require_once 'php/controlador/autenticacion.php';
                   <span class="section-heading mb-3">Ingresa a tu cuenta</span>
                 </h2>
                 <!--Formulario para iniciar la sesion-->
-                <form action="/php/controlador/autenticacion.php" method="POST">
+                <form action="/php/autenticacion.php" method="POST">
                   <div class="row">
                     <div class="col-md-3">
                       <span class="input-group-addon">USUARIO</span>
                     </div>
                     <div class="col-md-6">
-                      <input type="text" class="form-control" name="usuario" placeholder="Ingresa tu usuario">
+                      <input type="text" class="form-control" name="usu" id="usu" placeholder="Ingresa tu usuario">
                     </div>
                     <div class="col-md-3"></div>
                   </div>
@@ -105,7 +105,7 @@ require_once 'php/controlador/autenticacion.php';
                       <span class="input-group-addon">CONTRASE&Ntilde;A</span>
                     </div>
                     <div class="col-md-6">
-                      <input type="password" class="form-control" name="consigna" placeholder="Ingresa tu contraseña">
+                      <input type="password" class="form-control" name="pass" id="pass" placeholder="Ingresa tu contraseña">
                     </div>
                   <div class="col-md-3"></div>
                   <div class="intro-button mx-auto" style="margin-top:15px">
