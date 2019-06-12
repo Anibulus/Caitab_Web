@@ -1,8 +1,8 @@
 <?php
 
-require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/CuentaEmpleado.php';
-require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/Empleado.php';
-
+//require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/CuentaEmpleado.php';
+//require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/Empleado.php';
+require_once '/php/modelo/Empleado.php';
 if(isset($_POST["usuario"]) && isset($_POST["consigna"])) {
 
     $cuenta = (new CuentaEmpleado(null, null, $_POST["usuario"], $_POST["consigna"]))

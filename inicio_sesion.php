@@ -1,7 +1,7 @@
 <?php
 
 //require $_SERVER['DOCUMENT_ROOT'].'/php/controlador/autenticacion.php';
-
+require_once 'php/controlador/autenticacion.php';
 
 ?>
 
@@ -38,7 +38,7 @@
       <span class="site-heading-lower">CAITAB A.C.</span>
     </h1>
 
-    <!-- Navigation -->
+    <!-- Navegacion -->
     <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
       <div class="container">
         <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Start Bootstrap</a>
@@ -78,8 +78,8 @@
       </div>
     </nav>
 
-
-    <section class="page-section about-heading">
+    <!--Seccion para formulario-->
+    <section> <!--class="page-section about-heading"-->
       <div class="container">
         <img class="img-fluid rounded about-heading-img mb-3 mb-lg-0" src="img/background/1inicioSesion.jpg">
         <div class="about-heading-content">
@@ -89,9 +89,8 @@
                 <h2>
                   <span class="section-heading mb-3">Ingresa a tu cuenta</span>
                 </h2>
-
-                <form action="/php/controlador/autenticacion.php" method="post">
-
+                <!--Formulario para iniciar la sesion-->
+                <form action="/php/controlador/autenticacion.php" method="POST">
                   <div class="row">
                     <div class="col-md-3">
                       <span class="input-group-addon">USUARIO</span>
@@ -101,7 +100,6 @@
                     </div>
                     <div class="col-md-3"></div>
                   </div>
-
                   <div class="row">
                     <div class="col-md-3">
                       <span class="input-group-addon">CONTRASE&Ntilde;A</span>
@@ -111,10 +109,7 @@
                     </div>
                   <div class="col-md-3"></div>
                   <div class="intro-button mx-auto" style="margin-top:15px">
-                    <a href="agenda.php"><input type="button" value="Ingresar" class="btn btn-success btn-x2" onclick="camposVacios()"/><a/>
-                    <!--<input type="submit" value="Ingresar" class="btn btn-success btn-x2" />
-                    Es necesario reenviar a una validacion de iniciar sesion
-                  -->
+                    <input type="submit" value="Ingresar" class="btn btn-success btn-x2" />
                   </div>
 
                 </form>
@@ -247,11 +242,7 @@
                   <div class="intro-button mx-auto" style="margin-top: 20px">
                       <input type='submit' class="btn btn-primary btn-x2" value='Registrarse'>
                   </div>
-
                 </form>-->
-
-
-
               </div>
             </div>
           </div>

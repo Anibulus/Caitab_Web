@@ -1,6 +1,7 @@
 <?php
 
-require_once $_SERVER['DOCUMENT_ROOT'].'/php/conexion/base_datos.php';
+//require_once $_SERVER['DOCUMENT_ROOT'].'/php/conexion/base_datos.php';
+require_once '/php/conexion/base_datos.php';
 
 class Empleado {
     private $id;
@@ -33,9 +34,9 @@ class Empleado {
         try {
 
             $conexion = new conexion();
-            
+
             $consulta = $conexion-> prepare("SELECT ID, ID_CLIENTEPROVEEDOR, NOMBRE, APELLIDO, CARGO
-                FROM EMPLEADO 
+                FROM EMPLEADO
                 WHERE ID = :ID");
 
             $consulta->bindParam(':ID', $id);
@@ -62,9 +63,9 @@ class Empleado {
         try {
 
             $conexion = new conexion();
-            
+
             $consulta = $conexion-> prepare("SELECT ID, ID_CLIENTEPROVEEDOR, NOMBRE, APELLIDO, CARGO
-                FROM EMPLEADO 
+                FROM EMPLEADO
                 WHERE ID_CLIENTEPROVEEDOR = :ID_CLIENTEPROVEEDOR
                 AND NOMBRE = :NOMBRE
                 AND APELLIDO = :APELLIDO
@@ -96,7 +97,7 @@ class Empleado {
     public function insertar() {
         try {
 
-            $conexion = new conexion();            
+            $conexion = new conexion();
             $consulta = $conexion-> prepare("INSERT INTO EMPLEADO (
                 ID_CLIENTEPROVEEDOR,
                 NOMBRE,
@@ -104,7 +105,7 @@ class Empleado {
                 CARGO
             ) VALUES (
                 :ID_CLIENTEPROVEEDOR,
-                :NOMBRE, 
+                :NOMBRE,
                 :APELLIDO,
                 :CARGO
             )");
