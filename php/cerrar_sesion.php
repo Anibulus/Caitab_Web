@@ -7,6 +7,6 @@
     setcookie(session_name(),'',0,'/');
     session_regenerate_id(true);
 
-    header("Location: ../../../inicio_sesion.php");
+    header("old-caitab-web/index.html");
 
 ?>
