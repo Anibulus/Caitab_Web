@@ -1,7 +1,7 @@
 <?php
 
 //require_once $_SERVER['DOCUMENT_ROOT'].'/php/conexion/base_datos.php';
-require_once '/php/conexion/base_datos.php';
+require_once 'conexion.php';
 
 class Empleado {
   //Caracteristicas de la clase
@@ -17,8 +17,9 @@ class Empleado {
     private $estatus;
     private $email;
     private $idUsuario;
+    private $usuario;
 //Constructor de la clase
-    public function __construct($idE,$nom,$app,$dom,$fec,$pues,$tur,$tel,$telE,$est,$ema,$idU) {
+    public function __construct($idE,$nom,$app,$dom,$fec,$pues,$tur,$tel,$telE,$est,$ema,$idU,$usuario) {
         $this->idEmpleado = $idE;
         $this->nombre = $nom;
         $this->apellido = $app;
@@ -31,7 +32,9 @@ class Empleado {
         $this->estatus = $est;
         $this->email = $ema;
         $this->idUsuario = $idU;
+        $this->usuario=$usuario;
     }
+//Constructor de prueba
 //Aqui estan los det de la clase
     public function getId() {
         return $this->idEmpleado;
@@ -79,6 +82,10 @@ class Empleado {
 
     public function getIdUsuario(){
       return $this->idUsuario;
+    }
+
+    public function getUsuario() {
+        return $this->usuario;
     }
 
 //Aqui estan los set de la clase
@@ -130,24 +137,38 @@ class Empleado {
         $this->idUsuario=$idU;
     }
 
+    public function setUsuario($usu){
+        $this->usuario=$usu;
+    }
     //Aqui estan las funciones que se conectan con la base de datos
 
-    public function validarInicio($usu,$pass){
-      $registro=null;
+    public static function validarInicio($usu,$pass){
+      $resultado=null;
       $conexion = new Conexion();
-      $consulta = $conexion->prepare("select * from Usuarios where Usuario=:usu and Contrasenia=:pass");
+      $consulta = $conexion->prepare("select * from Usuario where Usuario=:usu and Contrasenia=:pass;");
       $consulta->bindParam(':usu',$usu);
-      $consulta->bindParam('pass',$pass)
-      $consulta->excecute();
-      $registro=$consulta->fetch():
+      $consulta->bindParam(':pass',$pass);
+      $consulta->execute();
+  		$registro = $consulta->fetch();
       if($registro){
-        $resultado = new self($registro['Usuario'], $registro['Contrasenia']);
-      }
+        $id=$registro['ID_Usu'];
+        $usu=$registro['Usuario'];
+        $consulta=$conexion->prepare("select * from Empleado where ID_Usu=:id");
+        $consulta->bindParam(':id',$id);
+        $consulta->execute();
+        $registro=null;//Esta variable se hace nuva para reevaluar que contenga datos AL MOMENTO DE EJECUTAR LA CONSULTA
+        $registro=$consulta->fetch();
+        if($registro){
+            $resultado = new self($registro['ID_Emp'],$registro['Nombre_E'],$registro['Apellidos_E'],$registro['Domicilio_E'],$registro['Fecha_Nac_E'],$registro['Esp_pue'],$registro['Turno'],$registro['Tel_E'],$registro['Tel_Eme_E'],$registro['Estatus_E'],$registro['Email_E'],$registro['ID_Usu'],$usu);
+        }//Fin de la segunda consulta
+      }//Aqui termina la dobvle sonsulta
+      unset ($conexion);
+      return $resultado;
     }//Aqui termina validar inicio de sesion
 
     public static function consultaIndividual($id, $nombre) {
       $conexion = new Conexion();
-      $consulta = $conexion-> prepare("select * from Empleado where ID_Empleado =:id or Nombre_E =:nom");
+      $consulta = $conexion-> prepare("select * from Empleado where ID_Emp =:id or Nombre_E =:nom;");
       $consulta->bindParam(':id', $id);
       $consulta->bindParam(':nom', $nombre);
       $consulta->execute();
@@ -155,7 +176,7 @@ class Empleado {
       var_dump($registro);//Esta linea se puede quitar
       if($registro)
   		{
-  			$resultado = new self($registro['ID_Empleado'], $registro['Nombre_E'], $registro['Apellidos_E'], $registro['Domicilio_E'],$registro['Fecha_Nac_E'], $registro['Especialidad_Puesto'], $registro['Turno'], $registro['Telefono_E'],$registro['Telefono_Eme_E'], $registro['Estatus_E'], $registro['Email_E'], $registro['ID_Usuario']);
+  			$resultado = new self($registro['ID_Emp'], $registro['Nombre_E'], $registro['Apellidos_E'], $registro['Domicilio_E'],$registro['Fecha_Nac_E'], $registro['Especialidad_Puesto'], $registro['Turno'], $registro['Telefono_E'],$registro['Telefono_Eme_E'], $registro['Estatus_E'], $registro['Email_E'], $registro['ID_Usu']);
   		}
   		else
   		{
@@ -169,7 +190,7 @@ class Empleado {
     public function nuevoEmpleado() {
       $insercion=false;
       $conexion = new Conexion();//Preguntar por procedimientos almacenados para inserciones y modificaciones
-      $consulta = $conexion->prepare("insert into Empleado (Nombre_E,Apellidos_E,Domicilio_E,Especialidad_Puesto,Fecha_Nac_E,Turno,Telefono_E,Telefono_Eme_E,Estatus_E,Email_E,ID_Usuario) values (:nom,:app,:dom,:fec,:pue,:tur,:tel,:telE,:est,:ema,:idU)");//Preguntar por procedimientos almacenados
+      $consulta = $conexion->prepare("insert into Empleado (Nombre_E,Apellidos_E,Domicilio_E,Especialidad_Puesto,Fecha_Nac_E,Turno,Telefono_E,Telefono_Eme_E,Estatus_E,Email_E,ID_Usu) values (:nom,:app,:dom,:fec,:pue,:tur,:tel,:telE,:est,:ema,:idU);");//Preguntar por procedimientos almacenados
       $consulta->bindParam(':nom', $this->nombre);
       $consulta->bindParam(':app', $this->apellido);
       $consulta->bindParam(':dom', $this->domicilio);
@@ -183,7 +204,7 @@ class Empleado {
       $consulta->bindParam(':idU', $this->idUsuario);
       $consulta->execute();//Despues de llenar la consulta de los datos correctos, la ejecuta
       if($consulta->rowCount()>0){//Si afecto filas,inserto y se valida directamente en el IF
-        $insercion true;
+        $insercion=true;
         echo "Se inserto correctamente";
       }else{
         echo "Ocurrio un error al insertar";
@@ -195,7 +216,7 @@ class Empleado {
     public function modificarEmpleado($id){
       $modificar = false;
       $conexion = new Conexion();
-      $consulta = $conexion->prepare("update Empleado set Nombre_E=:nom, Apellidos_E=:app, Domicilio_E=:dom, Especialidad_Puesto=:pue, Fecha_Nac_E=:fec, Turno=:tur, Telefono_E=:tel, Telefono_Eme_E=:telE, Estatus_E=:est,Email_E=:ema where ID_Empleado=:id");
+      $consulta = $conexion->prepare("update Empleado set Nombre_E=:nom, Apellidos_E=:app, Domicilio_E=:dom, Especialidad_Puesto=:pue, Fecha_Nac_E=:fec, Turno=:tur, Telefono_E=:tel, Telefono_Eme_E=:telE, Estatus_E=:est,Email_E=:ema where ID_Emp=:id;");
       $consulta->bindParam(':nom', $this->nombre);
       $consulta->bindParam(':app', $this->apellido);
       $consulta->bindParam(':dom', $this->domicilio);
@@ -207,7 +228,7 @@ class Empleado {
       $consulta->bindParam(':est', $this->estatus);
       $consulta->bindParam(':ema', $this->email);
       $consulta->bindParam(':id', $id);
-      $consulta->excecute();
+      $consulta->execute();
       if($consulta->rowCount()>0){//Ejecuta el query y al afectar entra en el IF
         $modificar=true;
         echo "Se ha modificado correctamente le registro";
@@ -221,13 +242,17 @@ class Empleado {
     public function eliminarEmpleado($id){//Unicamente se puede borrar por ID
       $eliminar=false;//Esta variable cambiara en el caso de que si se halla modificado el registro
       $conexion=new Conexion();//Se crea la conexion
-      $consulta=$conexion->prepare("update Empleado set Estatus_E='Inactivo' where ID_Emplado=:id");//prepara la sentencia
+      $consulta=$conexion->prepare("update Empleado set Estatus_E='Inactivo' where ID_Emp=:id;");//prepara la sentencia
       $consulta=bindParam(':id', $id);//Ingresa la variable en la sentencia
-      $consulta->excecute();//Ejecuta la sentencia en la base de datos
+      $consulta->execute();//Ejecuta la sentencia en la base de datos
       if($consulta->rowCount()>0){//SI hay filas afectadas entrara en el if
         $eliminar=true;
         echo "Se ha eliminado coorrectamente";
       }else{
         echo "No se ha podido eliminar";
-      }
+      }//fin del if
+      unset ($conexion);
+      return $eliminar;
     }//Fin de la funcion de eliminar
+  }//Fin de la clase empleado
+?>
