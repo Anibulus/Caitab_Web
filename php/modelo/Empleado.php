@@ -153,15 +153,19 @@ class Empleado {
   		$registro = $consulta->fetch();
       var_dump($registro);
       if($registro){
-        $resultado=true;/*
+        $resultado=true;
         $id=$registro['ID_Usu'];
+        var_dump($id);
         $usu=$registro['Usuario'];
+        var_dump($usu);
         $consulta=$conexion->prepare("select * from Empleado where ID_Usu=:id");
         $consulta->bindParam(':id',$id);
+        var_dump($consulta);
         $consulta->execute();
         $registro=null;//Esta variable se hace nuva para reevaluar que contenga datos AL MOMENTO DE EJECUTAR LA CONSULTA
         $registro=$consulta->fetch();
         if($registro){
+          var_dump($registro);
             $resultado = new self($registro['ID_Emp'],$registro['Nombre_E'],$registro['Apellidos_E'],$registro['Domicilio_E'],$registro['Fecha_Nac_E'],$registro['Esp_pue'],$registro['Turno'],$registro['Tel_E'],$registro['Tel_Eme_E'],$registro['Estatus_E'],$registro['Email_E'],$registro['ID_Usu'],$usu);
         }//Fin de la segunda consulta*/
       }//Aqui termina la dobvle sonsulta
