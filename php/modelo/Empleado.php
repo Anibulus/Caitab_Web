@@ -19,7 +19,7 @@ class Empleado {
     private $idUsuario;
     private $usuario;
 //Constructor de la clase
-    public function __construct($idE,$nom,$app,$dom,$fec,$pues,$tur,$tel,$telE,$est,$ema,$idU,$usuario) {
+    public function __construct($idE,$nom,$app,$dom,$fec,$pue,$tur,$tel,$telE,$est,$ema,$idU,$usuario) {
         $this->idEmpleado = $idE;
         $this->nombre = $nom;
         $this->apellido = $app;
@@ -149,23 +149,17 @@ class Empleado {
       $consulta->bindParam(':usu',$usu);
       $consulta->bindParam(':pass',$pass);
       $consulta->execute();
-      var_dump($consulta);
   		$registro = $consulta->fetch();
-      var_dump($registro);
       if($registro){
         $resultado=true;
         $id=$registro['ID_Usu'];
-        var_dump($id);
         $usu=$registro['Usuario'];
-        var_dump($usu);
         $consulta=$conexion->prepare("select * from Empleado where ID_Usu=:id");
         $consulta->bindParam(':id',$id);
-        var_dump($consulta);
         $consulta->execute();
         $registro=null;//Esta variable se hace nuva para reevaluar que contenga datos AL MOMENTO DE EJECUTAR LA CONSULTA
         $registro=$consulta->fetch();
         if($registro){
-          var_dump($registro);
             $resultado = new self($registro['ID_Emp'],$registro['Nombre_E'],$registro['Apellidos_E'],$registro['Domicilio_E'],$registro['Fecha_Nac_E'],$registro['Esp_pue'],$registro['Turno'],$registro['Tel_E'],$registro['Tel_Eme_E'],$registro['Estatus_E'],$registro['Email_E'],$registro['ID_Usu'],$usu);
         }//Fin de la segunda consulta*/
       }//Aqui termina la dobvle sonsulta
