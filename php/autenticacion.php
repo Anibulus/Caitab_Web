@@ -21,7 +21,7 @@ if($empleado){
     $_SESSION['Usuario']=$empleado->getUsuario();
     //Fecha nacimiento
     var_dump($_SESSION);
-    header("location:/old-caitab-web/store.html");
+    header("location:/old-caitab-web/menuEmpleado.php");
   }//Si se entrontro el registro
   else{
   	echo "<script type='text/javascript'>";
