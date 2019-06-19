@@ -1,32 +1,38 @@
 <?php
 session_start();
-//require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/CuentaEmpleado.php';
-//require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/Empleado.php';
-
+if(isset($_POST['usu'])){
 require_once 'modelo/Empleado.php';//requiere del archvo empleado, y empleado a su vez de conexion.php
-
 //Poner :: es hacer el objeto y ademas mandarlo a llamar
-echo"Esto contiene_POST";
-var_dump($_POST);
 $empleado = Empleado::validarInicio($_POST['usu'], $_POST['pass']);
-var_dump($empleado); //Esto es para verificar que datos contiene
-
 if($empleado){
   //echo "Bienvenido al sistema ".$empleado->getNomEmpleado();
-    $_SESSION['usuario']="Soy un coso raro";
-    //$_SESSION['contrasena']=$empleado->getNombre();
+    $_SESSION['idEmpleado']=$empleado->getId();
+    $_SESSION['nombre']=$empleado->getNombre();
+    $_SESSION['apellidos']=$empleado->getApellido();
+    $_SESSION['puesto']=$empleado->getPuesto();
+    $_SESSION['domicilio']=$empleado->getDomicilio();
+    $_SESSION['fechaNac']=$empleado->getFechaNac();
+    $_SESSION['turno']=$empleado->getTurno();
+    $_SESSION['telefono']=$empleado->getTelefono();
+    $_SESSION['TelefonoEme']=$empleado->getTelefonoEmergencia();
+    $_SESSION['estatus']=$empleado->getEstatus();
+    $_SESSION['email']=$empleado->getEmail();
+    $_SESSION['idUsuario']=$empleado->getIdUsuario();
+    $_SESSION['Usuario']=$empleado->getUsuario();
+    //Fecha nacimiento
     var_dump($_SESSION);
-    header("/old-caitab-web/index.html");
-  }
+    header("location:/old-caitab-web/menuEmpleado.php");
+  }//Si se entrontro el registro
   else{
-    echo 'Usuario ó contraseña incorrectos';
   	echo "<script type='text/javascript'>";
   	echo "alert ('Usuario ó Contraseña Incorrectos')";
   	echo "</script>";
-    //var_dump($empleado);
-    //var_dump($_SESSION);
-    //header("location:IniciarSesion.html");
-  }
-unset($empleado);
-//aqui termina mi wea
+    var_dump($empleado);
+    header("location:/old-caitab-web/inicio_sesion.php");
+  }//Si no se inicio sesion correctamenre
+unset($empleado);//Se elimina la variable
+}//Si se crea el POST
+else{
+  header("location:/old-caitab-web");//Si no se ha llenado el formulario
+}
 ?>
