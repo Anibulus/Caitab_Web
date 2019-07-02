@@ -71,15 +71,15 @@ if(isset($_SESSION['idEmpleado']) && isset($_SESSION["nombre"])) {//Si las varia
 
             <div class="cta-inner text-center rounded">
               <div class="intro-button mx-auto" style="position: inherit;">
-                <a class="btn btn-primary btn-x2" href="clientes_proveedores.html">Clientes y Proveedores</a>
+                <a class="btn btn-primary btn-x2" href="clientes_proveedores.html">Pacientes</a>
               </div>
             <br/>
               <div class="intro-button mx-auto" style="position: inherit;">
-                <a class="btn btn-primary btn-x2" href="inventario.html">Inventario de Productos</a>
+                <a class="btn btn-primary btn-x2" href="inventario.html">Citas</a>
               </div>
             <br/>
               <div class="intro-button mx-auto" style="position: inherit;">
-                <a class="btn btn-primary btn-x2" href="carrito_compras.php">Carrito de compras</a>
+                <a class="btn btn-primary btn-x2" href="carrito_compras.php">Empleados</a>
               </div>
             </div>
 
