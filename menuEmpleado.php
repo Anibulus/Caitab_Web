@@ -1,29 +1,26 @@
 <?php
-  header("Location: ../../../carrito_compras.php");
-
+/*
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/Empleado.php';
-
-session_start();
-if(isset($_SESSION["CuentaEmpleado"]) && isset($_SESSION["Empleado"])) {
-
+*/
+session_start();//Se inicia la sesion en este archivo junto a todos lo valores dados anteriormente
+if(isset($_SESSION['idEmpleado']) && isset($_SESSION["nombre"])) {//Si las variables de sesion han sido creadas, entra
+  /*
   if(is_null($_SESSION["CuentaEmpleado"])) {
-    header("Location: ../../../inicio_sesion.php");
+    header("Location: /old-caitab-web/inicio_sesion.php");
   }
-
   $empleado = $_SESSION["Empleado"];
   $cargo = (is_null($empleado)) ? "" : $empleado->getCargo();
-
   $cargos_validos = array("Gerente", "Supervisor", "Contador");
-
   if(!in_array($cargo, $cargos_validos)) {
     echo "<script>alert('baia baia hdtpm')</script>";
     header( "refresh:1;url=../../../carrito_compras.php" );
-  } 
-
+  }
+  */
+  var_dump($_SESSION);
 } else {
-  header("Location: ../../../index.html");
+  header("Location: /old-caitab-web/index.html");
 }
 ?>
 
@@ -55,7 +52,7 @@ if(isset($_SESSION["CuentaEmpleado"]) && isset($_SESSION["Empleado"])) {
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
       <span class="site-heading-upper text-primary mb-3">Dulcería</span>
-      <span class="site-heading-lower">LA BOMBONERA</span>
+      <span class="site-heading-lower">CAITAB</span>
     </h1>
 
     <!-- Navigation -->
@@ -87,12 +84,12 @@ if(isset($_SESSION["CuentaEmpleado"]) && isset($_SESSION["Empleado"])) {
             </div>
 
             <br/>
-            <form action="/php/controlador/cerrar_sesion.php" method="get">
+            <form action="php/cerrar_sesion.php" method="get">
               <div class="intro-button mx-auto" style="position: inherit;">
                 <input type="submit" value="Cerrar Sesión" class="btn btn-danger btn-x2"/>
               </div>
             </form>
-                
+
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ class Empleado {
     private $idUsuario;
     private $usuario;
 //Constructor de la clase
-    public function __construct($idE,$nom,$app,$dom,$fec,$pues,$tur,$tel,$telE,$est,$ema,$idU,$usuario) {
+    public function __construct($idE,$nom,$app,$dom,$fec,$pue,$tur,$tel,$telE,$est,$ema,$idU,$usuario) {
         $this->idEmpleado = $idE;
         $this->nombre = $nom;
         $this->apellido = $app;
@@ -151,6 +151,7 @@ class Empleado {
       $consulta->execute();
   		$registro = $consulta->fetch();
       if($registro){
+        $resultado=true;
         $id=$registro['ID_Usu'];
         $usu=$registro['Usuario'];
         $consulta=$conexion->prepare("select * from Empleado where ID_Usu=:id");
@@ -160,7 +161,7 @@ class Empleado {
         $registro=$consulta->fetch();
         if($registro){
             $resultado = new self($registro['ID_Emp'],$registro['Nombre_E'],$registro['Apellidos_E'],$registro['Domicilio_E'],$registro['Fecha_Nac_E'],$registro['Esp_pue'],$registro['Turno'],$registro['Tel_E'],$registro['Tel_Eme_E'],$registro['Estatus_E'],$registro['Email_E'],$registro['ID_Usu'],$usu);
-        }//Fin de la segunda consulta
+        }//Fin de la segunda consulta*/
       }//Aqui termina la dobvle sonsulta
       unset ($conexion);
       return $resultado;
