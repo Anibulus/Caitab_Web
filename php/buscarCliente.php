@@ -149,7 +149,7 @@ echo "
                 }//Esto muestra la informacion del cliente
                 echo "
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <button value='Regresar' class='btn btn-success btn-x2' />
+                    <a href='/Agenda.html'><button value='Regresar' class='btn btn-success btn-x2' /><a/>
                   </div>
 
                 </div>
