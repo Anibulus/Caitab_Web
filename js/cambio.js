@@ -1,9 +1,10 @@
-function actualizarProducto()
+//Seguir este ejemplo para actualizaciones y cosas varias
+function actualizar()
 {
-	var a=document.getElementById("codigo").value;
+	var a=document.getElementById("nombreB").value;
 	if(codigo!=null){
-	var f=document.getElementById("productos");
-	f.action="actualizar.php";
+	var f=document.getElementById("citas");
+	f.action="modificarCita.php";
 	f.submit();
 	}
 	else{

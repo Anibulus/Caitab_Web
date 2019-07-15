@@ -14,6 +14,7 @@ class Empleado {
     private $estatus;
     private $email;
     private $idUsuario;
+    private $fechaCita;
 //Constructor de la clase
     public function __construct($idE,$nom,$app,$dom,$fec,$tel,$telE,$est,$ema,$idU) {
         $this->idEmpleado = $idE;
@@ -69,6 +70,10 @@ class Empleado {
       return $this->idUsuario;
     }
 
+    public function getFechaCita(){
+      return $this->$fechaCita;
+    }
+
 //Aqui estan los set de la clase
     public function setId($idE) {
         $this->idEmpleado=$idE;
@@ -109,11 +114,15 @@ class Empleado {
     public function setIdUsuario($idU){
         $this->idUsuario=$idU;
     }
+
+    public function setFechaCita(){
+      return $this->$fechaCita;
+    }
     //Aqui estan las funciones que se conectan con la base de datos
 
     public static function consultaIndividual($id, $nombre, $apellido) {
       $conexion = new Conexion();
-      $consulta = $conexion-> prepare("select * from Empleado where ID_Cliente =:id or Nombre_C =:nom or Apellidos_C =:app;");
+      $consulta = $conexion-> prepare("select * from Cliente where ID_Cliente =:id or Nombre_C =:nom or Apellidos_C =:app;");
       $consulta->bindParam(':id', $id);
       $consulta->bindParam(':nom', $nombre);
       $consulta->bindParam(':app', $apellido);
@@ -124,6 +133,30 @@ class Empleado {
   		{
   			$resultado = new self($registro['ID_Cliente'], $registro['Nombre_C'], $registro['Apellidos_C'], $registro['Domicilio_C'],$registro['Fecha_Nac_C'], $registro['Telefono_C'],$registro['Telefono_Eme_C'], $registro['Estatus_C'], $registro['Email_C'], $registro['ID_Usu']);
   		}
+  		else
+  		{
+  			$resultado = false;
+  		}//Fin de validacion en caso de encontrar a un registro
+  		unset($conexion);//Destruye la variable conexion
+      var_dump($resultado);//Muestra lo que contiene la variable
+  		return $resultado;//Retorna el valor que contiene la variable
+    }//Fin de la consulta individual
+
+    public static function consultarCita($nombre, $apellido, $fecha) {
+      $conexion = new Conexion();
+      $consulta = $conexion-> prepare("select * from c.Cliente where f.Fecha =:fecha or c.Nombre_C =:nom or c.Apellidos_C =:app; join f Cita");
+      //verificar consulta
+      $consulta->bindParam(':nom', $nombre);
+      $consulta->bindParam(':app', $apellido);
+      $consulta->bindParam(':fecha', $fecha);
+      $consulta->execute();
+      $registro = $consulta->fetch();//La variable registro almacena lo que halla devuelto la consulta
+      var_dump($registro);//Esta linea se puede quitar
+      if($registro)
+  		{
+  			$resultado = new self($registro['ID_Cliente'], $registro['Nombre_C'], $registro['Apellidos_C'], $registro['Domicilio_C'],$registro['Fecha_Nac_C'], $registro['Telefono_C'],$registro['Telefono_Eme_C'], $registro['Estatus_C'], $registro['Email_C'], $registro['ID_Usu']);
+        $resultado->setFechaCita($registro['Fecha_Hora']);//Se agrega la informacion junto a la fecha como adicional
+      }
   		else
   		{
   			$resultado = false;
