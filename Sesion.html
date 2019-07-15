@@ -38,23 +38,23 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="index.html">
+              <a class="nav-link text-uppercase text-expanded" href="Agenda.html">
                 AGENDA
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="about.html">
+              <a class="nav-link text-uppercase text-expanded" href="Cita.html">
                 CITAS
               </a>
             </li>
             <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="products.html">
+              <a class="nav-link text-uppercase text-expanded" href="Sesion.html">
                 SESION
               </a>
             </li>
             <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="store.html">
+              <a class="nav-link text-uppercase text-expanded" href="php/cerrar_session.php">
                 CERRAR SESION
               </a>
             </li>
@@ -73,13 +73,13 @@
                   <span class='section-heading mb-3'>Buscar por</span>
                 </h2>
                 <!--Formulario para iniciar la sesion-->
-                <form id='Inicio'  method='POST' action='php/autenticacion.php'>
+                <form id='Inicio'  method='POST' action='php/buscarSesion.php'> <!--Aun no existe-->
                   <div class='row'>
                     <div class='col-md-3'>
                       <span class='input-group-addon'>ID DE CITA</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='usu' id='usu' placeholder='Id'/>
+                      <input type='text' class='form-control' name='id' id='id' placeholder='Id'/>
                     </div>
                     <div class='col-md-3'></div>
                   </div>
@@ -88,11 +88,11 @@
                       <span class='input-group-addon'>FECHA/HORA CITA</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='password' class='form-control' name='pass' id='pass' placeholder='Fecha y hora'/>
+                      <input type='password' class='form-control' name='fecha' id='fecha' placeholder='Fecha y hora'/>
                     </div>
                   <div class='col-md-3'></div>
                   </div>
-
+<!--        Aqui va un submit para realizar la accion de buscar        -->
                   </form>
 
                 <h2>
@@ -104,7 +104,7 @@
                       <span class='input-group-addon'>NOMBRE</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='usu' id='usu' placeholder='Nombre'/>
+                      <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
                     </div>
                     <div class='col-md-3'></div>
                   </div>
@@ -113,7 +113,7 @@
                       <span class='input-group-addon'>APELLIDO</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='password' class='form-control' name='pass' id='pass' placeholder='Apellido'/>
+                      <input type='password' class='form-control' name='appellido' id='apellido' placeholder='Apellido'/>
                     </div>
                   <div class='col-md-3'></div>
                   </div>
@@ -122,7 +122,7 @@
                       <span class='input-group-addon'>HORA DE INICIO</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='usu' id='usu' placeholder='Hora inicio'/>
+                      <input type='text' class='form-control' name='horaIni' id='horaIni' placeholder='Hora inicio'/>
                     </div>
                     <div class='col-md-3'></div>
                   </div>
@@ -131,7 +131,7 @@
                       <span class='input-group-addon'>HORA DE FIN</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='password' class='form-control' name='pass' id='pass' placeholder='Hora fin'/>
+                      <input type='password' class='form-control' name='horaFin' id='horaFin' placeholder='Hora fin'/>
                     </div>
                   <div class='col-md-3'></div>
                   </div>
@@ -140,7 +140,7 @@
                       <span class='input-group-addon'>DESCRIPCION</span>
                     </div>
                     <div class='col-md-6'>
-                      <textarea rows = '10' cols= '40' type='text' class='form-control' name='pass' id='pass' placeholder='Descripcion'></textarea>
+                      <textarea rows = '10' cols= '40' type='text' class='form-control' name='desc' id='desc' placeholder='Descripcion'></textarea>
                     </div>
                     </div>
                   <div class='row'>
@@ -148,25 +148,25 @@
                       <span class='input-group-addon'>CONCLUSION</span>
                     </div>
                     <div class='col-md-6'>
-                      <textarea rows = '10' cols= '40' type='text' class='form-control' name='pass' id='pass' placeholder='Conclusion'></textarea>
+                      <textarea rows = '10' cols= '40' type='text' class='form-control' name='con' id='con' placeholder='Conclusion'></textarea>
                     </div>
                   <div class='col-md-3'></div>
 
 
                   <div class='intro-button mx-auto' style='margin-top:15px'>
                     <input type='submit' value='Registrar' class='btn btn-success btn-x2' />
-                  </div> 
+                  </div>
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
-                  </div> 
+                    <input type='button' value='Consultar' class='btn btn-success btn-x2' />
+                  </div>
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Modificar' class='btn btn-success btn-x2' />
-                  </div>                                  
+                    <input type='button' value='Modificar' class='btn btn-success btn-x2' />
+                  </div>
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Limpiar todo' class='btn btn-success btn-x2' />
-                  </div>                  
+                    <input type='button' value='Limpiar todo' class='btn btn-success btn-x2' />
+                  </div>
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Regresar' class='btn btn-success btn-x2' />
+                    <input type='button' value='Regresar' class='btn btn-success btn-x2' />
                   </div>
                 </form>
 
