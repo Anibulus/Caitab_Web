@@ -25,18 +25,7 @@ function eliminarProducto()
 	}
 }
 
-function consulta()
-{
-	var d=document.getElementById("codigo").value;
-	if(codigo!=null){
-	var a=document.getElementById("productos");
-	a.action="consulta.php";
-	a.submit();
-	}
-	else{
-		alert("Necesitas llenar el campo codigo para usar este boton");
-	}
-}
+
 
 function consultarT(){
 	var a=document.getElementById("productos");
