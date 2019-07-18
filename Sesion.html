@@ -38,6 +38,12 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav mx-auto">
             <li class="nav-item px-lg-4">
+              <a class="nav-link text-uppercase text-expanded" href="IniEmp.html">
+                INICIO
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="Agenda.html">
                 AGENDA
                 <span class="sr-only">(current)</span>
@@ -76,10 +82,19 @@
                 <form id='Inicio'  method='POST' action='php/buscarSesion.php'> <!--Aun no existe-->
                   <div class='row'>
                     <div class='col-md-3'>
-                      <span class='input-group-addon'>ID DE CITA</span>
+                      <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='id' id='id' placeholder='Id'/>
+                      <input type='text' class='form-control' name='id' id='id' placeholder='Nombre'/>
+                    </div>
+                    <div class='col-md-3'></div>
+                  </div>
+                  <div class='row'>
+                    <div class='col-md-3'>
+                      <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
+                    </div>
+                    <div class='col-md-6'>
+                      <input type='text' class='form-control' name='id' id='id' placeholder='Apellido'/>
                     </div>
                     <div class='col-md-3'></div>
                   </div>
