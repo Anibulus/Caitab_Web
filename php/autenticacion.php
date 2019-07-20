@@ -22,7 +22,7 @@ if($empleado){
     //Fecha nacimiento
     var_dump($_SESSION);
     //header("location:/old-caitab-web/menuEmpleado.php");
-    header("location:/old-caitab-web/Agenda.html");
+    header("location:/old-caitab-web/IniEmp.html");
   }//Si se entrontro el registro
   else{
   	echo "<script type='text/javascript'>";

@@ -70,23 +70,23 @@
       </div>
     </nav>
 
-    <!--Seccion para formulario-->
-    <section> <!--class='page-section about-heading'-->
+        <section> <!--class='page-section about-heading'-->
         <div class='about-heading-content'>
           <div class='row'>
             <div class='col-xl-9 col-lg-10 mx-auto'>
               <div class='bg-faded rounded p-5'>
+
+
                 <h2>
-                  <span class='section-heading mb-3'>Buscar por</span>
+                  <span class='section-heading mb-3'>Resultado</span>
                 </h2>
-                <!--Formulario para iniciar la sesion-->
-                <form id='Inicio'  method='POST' action='php/buscarCliente.php'>
-                  <div class='row'>
+                <form id='Inicio'  method='POST' action='php/autenticacion.php'>
+                    <div class='row'>
                     <div class='col-md-3'>
                       <span class='input-group-addon'>NOMBRE</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='nombreB' id='nombreB' placeholder='Nombre'/>
+                      <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
                     </div>
                     <div class='col-md-3'></div>
                   </div>
@@ -95,26 +95,56 @@
                       <span class='input-group-addon'>APELLIDO</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='apellidoB' id='apellidoB' placeholder='Apellido'/>
+                      <input type='text' class='form-control' name='apellido' id='apellidos' placeholder='Apellido'/>
                     </div>
                   <div class='col-md-3'></div>
                   </div>
-
-
-                  <center>
-                  <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
+                  <div class='row'>
+                    <div class='col-md-3'>
+                      <span class='input-group-addon'>DIRECCION</span>
+                    </div>
+                    <div class='col-md-6'>
+                      <input type='text' class='form-control' name='direccion' id='direccion' placeholder='Direccion'/>
+                    </div>
+                    <div class='col-md-3'></div>
                   </div>
-                  </center>
+                  <div class='row'>
+                    <div class='col-md-3'>
+                      <span class='input-group-addon'>TELEFONO</span>
+                    </div>
+                    <div class='col-md-6'>
+                      <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
+                    </div>
+                  <div class='col-md-3'></div>
+                  </div>
+                  <div class='row'>
+                    <div class='col-md-3'>
+                      <span class='input-group-addon'>TEL. DE EMERGENCIA</span>
+                    </div>
+                    <div class='col-md-6'>
+                      <input type='text' class='form-control' name='telefonoEme' id='telefonoEme' placeholder='Telefono de emergencia'/>
+                    </div>
+                  <div class='col-md-3'></div>
+                  </div>
+                  <div class='row'>
+                    <div class='col-md-3'>
+                      <span class='input-group-addon'>E-MAIL</span>
+                    </div>
+                    <div class='col-md-6'>
+                      <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
+                    </div>
+                  <div class='col-md-3'></div>
 
-                  </form>
+                  <div class='intro-button mx-auto' style='margin-top:15px'>
+                    <input type='button' value='Regresar' class='btn btn-success btn-x2' onclick="" />
+                  </div>
+                </form>
 
-                </div>
+              </div>
             </div>
           </div>
         </div>
     </section>
-
 
     <footer class='footer text-faded text-center py-5'>
       <div class='container'>
