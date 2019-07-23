@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template -->
     <link href='css/business-casual.min.css' rel='stylesheet'>
+    <script type="text/javascript" src="js/cambio.js"></script>
 
   </head>
 
@@ -49,12 +50,12 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
-            <li class="nav-item px-lg-4">
+            <li class="nav-item active px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="Cita.html">
                 CITAS
               </a>
             </li>
-            <li class="nav-item active px-lg-4">
+            <li class="nav-item px-lg-4">
               <a class="nav-link text-uppercase text-expanded" href="Sesion.html">
                 SESION
               </a>
@@ -69,78 +70,100 @@
       </div>
     </nav>
 
-    <!--Seccion para formulario-->
     <section> <!--class='page-section about-heading'-->
         <div class='about-heading-content'>
           <div class='row'>
             <div class='col-xl-9 col-lg-10 mx-auto'>
               <div class='bg-faded rounded p-5'>
-                <h2>
-                  <span class='section-heading mb-3'>Buscar por</span>
-                </h2>
-                <!--Formulario para iniciar la sesion-->
-                <form id='Inicio'  method='POST' action='php/buscarSesion.php'> <!--Aun no existe-->
-                  <div class='row'>
-                    <div class='col-md-3'>
-                      <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
-                    </div>
-                    <div class='col-md-6'>
-                      <input type='text' class='form-control' name='id' id='id' placeholder='Nombre'/>
-                    </div>
-                    <div class='col-md-3'></div>
-                  </div>
-                  <div class='row'>
-                    <div class='col-md-3'>
-                      <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
-                    </div>
-                    <div class='col-md-6'>
-                      <input type='text' class='form-control' name='id' id='id' placeholder='Apellido'/>
-                    </div>
-                    <div class='col-md-3'></div>
-                  </div>
-                  <div class='row'>
-                    <div class='col-md-3'>
-                      <span class='input-group-addon'>FECHA/HORA CITA</span>
-                    </div>
-                    <div class='col-md-6'>
-                      <input type='password' class='form-control' name='fecha' id='fecha' placeholder='Fecha y hora'/>
-                    </div>
-                  <div class='col-md-3'></div>
 
-                  <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
-                  </div>
-                  <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='submit' value='Crear' class='btn btn-success btn-x2' />
-                  </div>
+<h2>
+  <span class='section-heading mb-3'>Resultado</span>
+</h2>
+<form id='Inicio'  method='POST' action='php/autenticacion.php'>
+    <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>NOMBRE</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>APELLIDO</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
+    </div>
+  <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>CONSULTORIO</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio'/>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>TELEFONO</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
+    </div>
+  <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>E-MAIL</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
+    </div>
+    </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>HORA/FECHA CITA</span>
+    </div>
+    <div class='col-md-6'>
+    <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Hora y fecha'/>
+    </div>
+  <div class='col-md-3'></div>
 
 
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <input type='button' value='Registrar' class='btn btn-success btn-x2' onclick="actualizar()" />
+  </div>
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <input type='button' value='Regresar' class='btn btn-success btn-x2' onclick="" />
+  </div>
+</form>
 
-<!--        Aqui va un submit para realizar la accion de buscar        -->
-                  </form>
-
-                </div>
-            </div>
-          </div>
-        </div>
-    </section>
+</div>
+</div>
+</div>
+</div>
+</section>
 
 
-    <footer class='footer text-faded text-center py-5'>
-      <div class='container'>
-        <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
-      </div>
-    </footer>
+<footer class='footer text-faded text-center py-5'>
+<div class='container'>
+<p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
+</div>
+</footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src='vendor/jquery/jquery.min.js'></script>
-    <script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
+<!-- Bootstrap core JavaScript -->
+<script src='vendor/jquery/jquery.min.js'></script>
+<script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
 
-  </body>
+</body>
 
-  <!-- Script to highlight the active date in the hours list -->
-  <script>
-    $('.list-hours li').eq(new Date().getDay()).addClass('today');
-  </script>
+<!-- Script to highlight the active date in the hours list -->
+<script>
+$('.list-hours li').eq(new Date().getDay()).addClass('today');
+</script>
 
 </html>
