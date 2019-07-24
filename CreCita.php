@@ -40,8 +40,6 @@ if(isset($_SESSION['Usuario'])){
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
           </button>
-
-          <!--Barra de navegacion-->
           <div class='collapse navbar-collapse' id='navbarResponsive'>
             <ul class='navbar-nav mx-auto'>
               <li class='nav-item px-lg-4'>
@@ -67,7 +65,7 @@ if(isset($_SESSION['Usuario'])){
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='php/cerrar_sesion.php'>
+                <a class='nav-link text-uppercase text-expanded' href='php/cerrar_session.php'>
                   CERRAR SESION
                 </a>
               </li>
@@ -76,78 +74,106 @@ if(isset($_SESSION['Usuario'])){
         </div>
       </nav>
 
-      <!--Seccion para formulario-->
       <section> <!--class='page-section about-heading'-->
           <div class='about-heading-content'>
             <div class='row'>
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
-                  <h2>
-                    <span class='section-heading mb-3'>Buscar por</span>
-                  </h2>
-                  <form id='citas'  method='POST' action='php/buscarCita.php
-                  '>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='nombreB' id='nombreB' placeholder='Nombre'/>
-                      </div>
-                      <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellidoB' id='apellidoB' placeholder='Apellido'/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>FECHA (DIA/MES/AÑO)</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='fechaB' id='fechaB' placeholder='Fecha'/>
-                      </div>
-                      <div class='col-md-3'></div>
 
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
-                    </div>
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <a href='CreCita.php'><input type='button' value='Crear' class='btn btn-success btn-x2' /><a/>
-                    </div>
-                    </form>
-                  </div>
-              </div>
-            </div>
-          </div>
-      </section>
-  <!--Pie de la Pagina-->
-      <footer class='footer text-faded text-center py-5'>
-        <div class='container'>
-          <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
-        </div>
-      </footer>
+  <h2>
+    <span class='section-heading mb-3'>Resultado</span>
+  </h2>
+  <form id='Inicio'  method='POST' action='php/autenticacion.php'>
+      <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>NOMBRE</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
+      </div>
+      <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>APELLIDO</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
+      </div>
+    <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>CONSULTORIO</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio'/>
+      </div>
+      <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>TELEFONO</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
+      </div>
+    <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>E-MAIL</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
+      </div>
+      </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>HORA/FECHA CITA</span>
+      </div>
+      <div class='col-md-6'>
+      <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Hora y fecha'/>
+      </div>
+    <div class='col-md-3'></div>
 
-      <!-- Bootstrap core JavaScript -->
-      <script src='vendor/jquery/jquery.min.js'></script>
-      <script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
 
-    </body>
+    <div class='intro-button mx-auto' style='margin-top:15px'>
+      <input type='submit' value='Registrar' class='btn btn-success btn-x2'/>
+    </div>
+    <div class='intro-button mx-auto' style='margin-top:15px'>
+      <a href='Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' onclick='' /><a/>
+    </div>
+  </form>
 
-    <!-- Script to highlight the active date in the hours list -->
-    <script>
-      $('.list-hours li').eq(new Date().getDay()).addClass('today');
-    </script>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
+
+
+  <footer class='footer text-faded text-center py-5'>
+  <div class='container'>
+  <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
+  </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src='vendor/jquery/jquery.min.js'></script>
+  <script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
+
+  </body>
+
+  <!-- Script to highlight the active date in the hours list -->
+  <script>
+  $('.list-hours li').eq(new Date().getDay()).addClass('today');
+  </script>
 
   </html>
-";
+  ";
+}else{
 
 }
-else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
-}
+
+?>

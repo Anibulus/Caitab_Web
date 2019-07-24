@@ -103,16 +103,12 @@ if(isset($_SESSION['Usuario'])){
                       </div>
                     <div class='col-md-3'></div>
                     </div>
-
-
                     <center>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
                       <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
                     </div>
                     </center>
-
                     </form>
-
                   </div>
               </div>
             </div>
