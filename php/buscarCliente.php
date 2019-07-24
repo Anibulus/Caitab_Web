@@ -2,7 +2,7 @@
 session_start();
 if(isset($_POST['nombreB'])){
 //requiere del archvo empleado, y empleado a su vez de conexion.php
-require_once 'clases/Cliente.php';//Requiere del objeto Cliente
+require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
 $cliente = new Cliente($_POST['idB'], $_POST['nombreB'],$_POST['apellidoB']);//verificar que se cree de esa manera
 $buscar = $cliente -> consultaIndividual($_POST['idB'], $_POST['nombreB'],$_POST['apellidoB']);
 var_dump($buscar);

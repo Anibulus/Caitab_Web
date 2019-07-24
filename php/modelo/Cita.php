@@ -71,6 +71,27 @@ class Cita{
     unset($conexion);//Destruye la variable conexion
     var_dump($resultado);//Muestra lo que contiene la variable
     return $resultado;//Retorna el valor que contiene la variable
-  }
+  }//Fin de la funcion de consulta
+
+  public function nuevaCita($idE,$idC,$Fecha,$Consultorio){
+    $resultado=false;
+    $conexion = new Conexion();
+    $consulta = $conexion-> prepare("insert into cita(ID_Cita,ID_Emp,ID_Cli,Fecha_Hora,Consultorio) values (null, :idE,:idC,:fec,:cons);");
+    $consulta->bindParam(':idE', $idE);
+    $consulta->bindParam(':idC', $idC);
+    $consulta->bindParam(':fec', $Fecha);
+    $consulta->bindParam(':cons', $Consultorio);
+    $consulta->execute();
+    $registro = $consulta->fetch();//La variable registro almacena lo que halla devuelto la consulta
+    //var_dump($registro);//Esta linea se puede quitar
+    if($registro)
+    {
+      $resultado = true;
+    }
+    //Fin de validacion en caso de encontrar a un registro
+    unset($conexion);//Destruye la variable conexion
+    var_dump($resultado);//Muestra lo que contiene la variable
+    return $resultado;//Retorna el valor que contiene la variable
+  }//Fin de la funcion de ingresar nuevo
 }//Fin de la clase
 ?>

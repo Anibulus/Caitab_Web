@@ -21,20 +21,20 @@ echo "
     <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
     <meta name='description' content=''>
     <meta name='author' content=''>
-    <script type='text/javascript' src='js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
+    <script type='text/javascript' src='/old-caitab-web/js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
 
     <title>CAITAB A.C.</title>
 
-    <link href='img/logoCaitab' rel='icon'>
-    <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
+    <link href='/old-caitab-web/img/logoCaitab' rel='icon'>
+    <link href='/old-caitab-web/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
     <!-- Custom fonts for this template -->
     <link href='https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i' rel='stylesheet'>
 
     <!-- Custom styles for this template -->
-    <link href='css/business-casual.min.css' rel='stylesheet'>
-    <script type='text/javascript' src='js/cambio.js'></script>
+    <link href='/old-caitab-web/css/business-casual.min.css' rel='stylesheet'>
+    <script type='/old-caitab-web/text/javascript' src='js/cambio.js'></script>
 
   </head>
 
