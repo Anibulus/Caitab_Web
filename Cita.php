@@ -9,8 +9,7 @@ if(isset($_SESSION['Usuario'])){
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
       <meta name='description' content=''>
       <meta name='author' content=''>
-      <!--Esta linea ayudara a la validaciones de los campos-->
-      <script type='text/javascript' src='js/cambio.js'></script>
+      <script type='text/javascript' src='js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
 
       <title>CAITAB A.C.</title>
 
@@ -24,6 +23,7 @@ if(isset($_SESSION['Usuario'])){
 
       <!-- Custom styles for this template -->
       <link href='css/business-casual.min.css' rel='stylesheet'>
+      <script type='text/javascript' src='js/cambio.js'></script>
 
     </head>
 
@@ -40,6 +40,8 @@ if(isset($_SESSION['Usuario'])){
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
           </button>
+
+          <!--Barra de navegacion-->
           <div class='collapse navbar-collapse' id='navbarResponsive'>
             <ul class='navbar-nav mx-auto'>
               <li class='nav-item px-lg-4'>
@@ -48,13 +50,13 @@ if(isset($_SESSION['Usuario'])){
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
-              <li class='nav-item active px-lg-4'>
+              <li class='nav-item px-lg-4'>
                 <a class='nav-link text-uppercase text-expanded' href='Agenda.php'>
                   AGENDA
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
-              <li class='nav-item px-lg-4'>
+              <li class='nav-item active px-lg-4'>
                 <a class='nav-link text-uppercase text-expanded' href='Cita.php'>
                   CITAS
                 </a>
@@ -83,11 +85,11 @@ if(isset($_SESSION['Usuario'])){
                   <h2>
                     <span class='section-heading mb-3'>Buscar por</span>
                   </h2>
-                  <!--Formulario para iniciar la sesion-->
-                  <form id='Inicio'  method='POST' action='php/buscarCliente.php'>
+                  <form id='citas'  method='POST' action='php/buscarCita.php
+                  '>
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE</span>
+                        <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
                       </div>
                       <div class='col-md-6'>
                         <input type='text' class='form-control' name='nombreB' id='nombreB' placeholder='Nombre'/>
@@ -96,30 +98,35 @@ if(isset($_SESSION['Usuario'])){
                     </div>
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO</span>
+                        <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
                       </div>
                       <div class='col-md-6'>
                         <input type='text' class='form-control' name='apellidoB' id='apellidoB' placeholder='Apellido'/>
                       </div>
                     <div class='col-md-3'></div>
                     </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>FECHA (DIA/MES/AÑO)</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='text' class='form-control' name='fechaB' id='fechaB' placeholder='Fecha'/>
+                      </div>
+                      <div class='col-md-3'></div>
 
-
-                    <center>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
                       <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
                     </div>
-                    </center>
-
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <a href='CreCita.html'><input type='button' value='Crear' class='btn btn-success btn-x2' /><a/>
+                    </div>
                     </form>
-
                   </div>
               </div>
             </div>
           </div>
       </section>
-
-
+  <!--Pie de la Pagina-->
       <footer class='footer text-faded text-center py-5'>
         <div class='container'>
           <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
@@ -137,18 +144,10 @@ if(isset($_SESSION['Usuario'])){
       $('.list-hours li').eq(new Date().getDay()).addClass('today');
     </script>
 
-  </html>";
+  </html>
+";
 
 }
 else{
   header('location:/old-caitab-web');//Si no se ha llenado el formulario
 }
-?>
-<!-- Base de seguridad
-if(isset($_POST['usu'])){
-
-}
-else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
-}
--->
