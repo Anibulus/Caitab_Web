@@ -29,7 +29,7 @@ if($empleado){
   	echo "alert ('Usuario ó Contraseña Incorrectos')";
   	echo "</script>";
     var_dump($empleado);
-    header("location:/old-caitab-web/inicio_sesion.php");
+    header("location:/old-caitab-web/inicio_sesion.html");
   }//Si no se inicio sesion correctamenre
 unset($empleado);//Se elimina la variable
 }//Si se crea el POST
