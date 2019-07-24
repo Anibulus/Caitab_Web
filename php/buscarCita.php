@@ -7,10 +7,13 @@ $cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fech
 $buscar = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
 require_once 'modelo/Cita.php';
 $cita=new Cita(0,0,0,0,0);
-//var_dumb($cita);
 $cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
+//Se otorga el numero de la cita en la variable de sesion para utilizarla globalmente sin necesidad de seguir consultando
+if($cita!=null){
+$_SESSION['idCita']=$cita->getIDCita();
+}
+//var_dump($_SESSION);
 //var_dumb($cita);
-//
 //var_dump($cliente);
 //var_dump($buscar);
 echo "
@@ -89,8 +92,9 @@ echo "
         <div class='about-heading-content'>
           <div class='row'>
             <div class='col-xl-9 col-lg-10 mx-auto'>
-              <div class='bg-faded rounded p-5'>
-
+              <div class='bg-faded rounded p-5'>";
+              if($cita!=null){
+                echo"
 <h2>
   <span class='section-heading mb-3'>Resultado</span>
 </h2>
@@ -154,7 +158,13 @@ echo "
     <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2'/><a/>
   </div>
 </form>
-
+";
+}else{
+  echo"
+  <span class='section-heading mb-3'>No tienene citas pendientes con".$cliente->getNombre()." ".$cliente->getApellido.""</span>
+  ";
+}
+echo"
 </div>
 </div>
 </div>

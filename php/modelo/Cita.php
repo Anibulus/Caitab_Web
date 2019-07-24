@@ -82,9 +82,9 @@ class Cita{
     $consulta->bindParam(':fec', $Fecha);
     $consulta->bindParam(':cons', $Consultorio);
     $consulta->execute();
-    $registro = $consulta->fetch();//La variable registro almacena lo que halla devuelto la consulta
+    //$registro = $consulta->rowCount();//La variable registro almacena lo que halla devuelto la consulta
     //var_dump($registro);//Esta linea se puede quitar
-    if($registro)
+    if($consulta->rowCount())
     {
       $resultado = true;
     }
@@ -97,16 +97,16 @@ class Cita{
   public function modificarCita($idCita,$idE,$idC,$Fecha,$Consultorio){
     $resultado=false;
     $conexion = new Conexion();
-    $consulta = $conexion-> prepare("update cita ID_Emp=:idE,ID_Cli=:idC,Fecha_Hora=:fec,Consultorio=:cons where ID_Cita=:id;");
+    $consulta = $conexion-> prepare("update cita set ID_Emp=:idE,ID_Cli=:idC,Fecha_Hora=:fec,Consultorio=:cons where ID_Cita=:id;");
     $consulta->bindParam(':idE', $idE);
     $consulta->bindParam(':idC', $idC);
     $consulta->bindParam(':fec', $Fecha);
     $consulta->bindParam(':cons', $Consultorio);
     $consulta->bindParam(':id', $idCita);
     $consulta->execute();
-    $registro = $consulta->fetch();//La variable registro almacena lo que halla devuelto la consulta
+    //$registro = ;//La variable registro almacena lo que halla devuelto la consulta
     //var_dump($registro);//Esta linea se puede quitar
-    if($registro)
+    if($consulta->rowCount())
     {
       $resultado = true;
     }

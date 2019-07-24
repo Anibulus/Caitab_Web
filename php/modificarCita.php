@@ -6,10 +6,13 @@ if(isset($_POST['consultorio'])){
   $cliente = $cliente -> consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
   require_once 'modelo/Cita.php';
   $cita=new Cita(0,0,0,0,0);
-  //var_dumb($cita);
-  $cita=$cita->consultarCita($cliente->getId(),$_POST['fecha'],$_SESSION['idEmpleado']);
-  $modificar=$cita->modificarCita($cita->getIDCita(),$_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
-  var_dumb($modificar);
+  $modificar=$cita->modificarCita($_SESSION['idCita'],$_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
+  //var_dumb($modificar);
+  var_dump($cliente->getId());
+  //var_dumb($_SESSION['idEmpleado']);
+  //var_dumb($_SESSION['idCita']);
+  var_dump($_POST['fecha']);
+  var_dump($_POST['consultorio']);
   echo "
   <!DOCTYPE html>
   <html lang='en'>
@@ -87,19 +90,18 @@ if(isset($_POST['consultorio'])){
             <div class='row'>
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>";
-                if($modificar){
-  echo"
-  <h2>
-    <span class='section-heading mb-3'>Se ha modificado correctamente el registro </span>
-  </h2>";
-}else{
-  echo"
-  <h2>
-    <span class='section-heading mb-3'>No se ha podido completar la accion</span>
-  </h2>";
-}
-
-
+              if($modificar){
+                echo"
+                <h2>
+                  <span class='section-heading mb-3'>Se ha modificado correctamente el registro </span>
+                </h2>";
+              }
+              else{
+                echo"
+                <h2>
+                  <span class='section-heading mb-3'>No se ha podido completar la accion</span>
+                </h2>";
+              }
   echo "
   </div>
   </div>
