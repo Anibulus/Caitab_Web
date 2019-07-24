@@ -1,6 +1,13 @@
 <?php
 session_start();
-if(isset($_SESSION['Usuario'])){
+if(isset($_POST['Usuario'])){
+  require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
+  $cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
+  $cliente = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
+  require_once 'modelo/Cita.php';
+  $cita=new Cita(0,0,0,0,0);
+  //var_dumb($cita);
+  $cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
   echo "
   <!DOCTYPE html>
   <html lang='en'>
@@ -81,53 +88,8 @@ if(isset($_SESSION['Usuario'])){
                 <div class='bg-faded rounded p-5'>
 
   <h2>
-    <span class='section-heading mb-3'>Resultado</span>
+    <span class='section-heading mb-3'>Su cita se ha registrado coerrectante</span>
   </h2>
-  <form id='Inicio'  method='POST' action='php/nuevaCita.php'>
-      <div class='row'>
-      <div class='col-md-3'>
-        <span class='input-group-addon'>NOMBRE</span>
-      </div>
-      <div class='col-md-6'>
-        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
-      </div>
-      <div class='col-md-3'></div>
-    </div>
-    <div class='row'>
-      <div class='col-md-3'>
-        <span class='input-group-addon'>APELLIDO</span>
-      </div>
-      <div class='col-md-6'>
-        <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
-      </div>
-    <div class='col-md-3'></div>
-    </div>
-    <div class='row'>
-      <div class='col-md-3'>
-        <span class='input-group-addon'>CONSULTORIO</span>
-      </div>
-      <div class='col-md-6'>
-        <input type='text' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio'/>
-      </div>
-      <div class='col-md-3'></div>
-    </div>
-    <div class='row'>
-      <div class='col-md-3'>
-        <span class='input-group-addon'>HORA/FECHA CITA</span>
-      </div>
-      <div class='col-md-6'>
-      <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Hora y fecha'/>
-      </div>
-    <div class='col-md-3'></div>
-
-
-    <div class='intro-button mx-auto' style='margin-top:15px'>
-      <input type='submit' value='Registrar' class='btn btn-success btn-x2'/>
-    </div>
-    <div class='intro-button mx-auto' style='margin-top:15px'>
-      <a href='Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' onclick='' /><a/>
-    </div>
-  </form>
 
   </div>
   </div>
@@ -155,8 +117,8 @@ if(isset($_SESSION['Usuario'])){
 
   </html>
   ";
-}else{
- header("location:/old-caitab-web");
-}
 
+}else{
+  location("location:/old-caitab-web");
+}
 ?>
