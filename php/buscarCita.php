@@ -94,7 +94,7 @@ echo "
 <h2>
   <span class='section-heading mb-3'>Resultado</span>
 </h2>
-<form id='Inicio'  method='POST' action='php/autenticacion.php'>
+<form id='Inicio'  method='POST' action='modificarCita.php'>
     <div class='row'>
     <div class='col-md-3'>
       <span class='input-group-addon'>NOMBRE</span>
@@ -151,9 +151,6 @@ echo "
     <input type='submit' value='Modificar' class='btn btn-success btn-x2' onclick='' />
   </div>
   <div class='intro-button mx-auto' style='margin-top:15px'>
-    <input type='button' value='Limpiar todo' class='btn btn-success btn-x2' onclick='limpiarConsCita()' />
-  </div>
-  <div class='intro-button mx-auto' style='margin-top:15px'>
     <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2'/><a/>
   </div>
 </form>
@@ -185,6 +182,7 @@ $('.list-hours li').eq(new Date().getDay()).addClass('today');
 </html>
 ";
 unset($cliente);//Se elimina la variable
+unset($cita);
 }//Si se crea el POST
 else{
   header('location:/old-caitab-web');//Si no se ha llenado el formulario

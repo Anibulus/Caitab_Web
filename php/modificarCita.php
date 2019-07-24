@@ -5,9 +5,11 @@ if(isset($_POST['consultorio'])){
   $cliente = new Cliente(0,$_POST['nombre'],$_POST['apellido'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
   $cliente = $cliente -> consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
   require_once 'modelo/Cita.php';
-  $cita=new Cita(0,$_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
+  $cita=new Cita(0,0,0,0,0);
   //var_dumb($cita);
-  $cita=$cita->nuevaCita($_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
+  $cita=$cita->consultarCita($cliente->getId(),$_POST['fecha'],$_SESSION['idEmpleado']);
+  $modificar=$cita->modificarCita($cita->getIDCita(),$_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
+  var_dumb($modificar);
   echo "
   <!DOCTYPE html>
   <html lang='en'>
@@ -20,7 +22,6 @@ if(isset($_POST['consultorio'])){
 
       <title>CAITAB A.C.</title>
 
-      <!-- Bootstrap core CSS -->
       <link href='/old-caitab-web/img/logoCaitab' rel='icon'>
       <link href='/old-caitab-web/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
@@ -30,7 +31,7 @@ if(isset($_POST['consultorio'])){
 
       <!-- Custom styles for this template -->
       <link href='/old-caitab-web/css/business-casual.min.css' rel='stylesheet'>
-      <script type='text/javascript' src='/old-caitab-web/js/cambio.js'></script>
+      <script type='/old-caitab-web/text/javascript' src='js/cambio.js'></script>
 
     </head>
 
@@ -43,7 +44,7 @@ if(isset($_POST['consultorio'])){
 
           <nav class='navbar navbar-expand-lg navbar-dark py-lg-4' id='mainNav'>
         <div class='container'>
-          <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'>Start Bootstrap</a>
+          <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'></a>
           <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
             <span class='navbar-toggler-icon'></span>
           </button>
@@ -86,20 +87,20 @@ if(isset($_POST['consultorio'])){
             <div class='row'>
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>";
-                if($cita){//Si regresa true, es decir se inserto correctamente
-                  echo"
-                  <h2>
-                    <span class='section-heading mb-3'>Su cita se ha registrado coerrectante</span>
-                  </h2>
-                  ";
-                }else{//En caso contrario
-                  echo"
-                  <h2>
-                    <span class='section-heading mb-3'>Su cita se ha registrado coerrectante</span>
-                  </h2>
-                  ";
-                }
-echo"
+                if($modificar){
+  echo"
+  <h2>
+    <span class='section-heading mb-3'>Se ha modificado correctamente el registro </span>
+  </h2>";
+}else{
+  echo"
+  <h2>
+    <span class='section-heading mb-3'>No se ha podido completar la accion</span>
+  </h2>";
+}
+
+
+  echo "
   </div>
   </div>
   </div>
@@ -126,10 +127,9 @@ echo"
 
   </html>
   ";
-unset($cliente);
-unset($cita);
-}
-else{
-  header("location:/old-caitab-web");
+  unset($cliente);//Se elimina la variable
+  unset($cita);
+}else{
+  header('location:/old-caitab-web');
 }
 ?>
