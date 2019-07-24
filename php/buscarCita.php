@@ -1,3 +1,19 @@
+<?php
+session_start();
+if(isset($_POST['nombreB'])){
+//requiere del archvo empleado, y empleado a su vez de conexion.php
+require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
+$cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
+$buscar = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
+require_once 'modelo/Cita.php';
+$cita=new Cita(0,0,0,0,0);
+//var_dumb($cita);
+$cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
+//var_dumb($cita);
+//
+//var_dump($cliente);
+//var_dump($buscar);
+echo "
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -9,7 +25,6 @@
 
     <title>CAITAB A.C.</title>
 
-    <!-- Bootstrap core CSS -->
     <link href='img/logoCaitab' rel='icon'>
     <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
@@ -19,7 +34,7 @@
 
     <!-- Custom styles for this template -->
     <link href='css/business-casual.min.css' rel='stylesheet'>
-    <script type="text/javascript" src="js/cambio.js"></script>
+    <script type='text/javascript' src='js/cambio.js'></script>
 
   </head>
 
@@ -30,38 +45,38 @@
       <span class='site-heading-lower'>CAITAB A.C.</span>
     </h1>
 
-        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <nav class='navbar navbar-expand-lg navbar-dark py-lg-4' id='mainNav'>
+      <div class='container'>
+        <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'></a>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
+          <span class='navbar-toggler-icon'></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="IniEmp.html">
+        <div class='collapse navbar-collapse' id='navbarResponsive'>
+          <ul class='navbar-nav mx-auto'>
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/IniEmp.html'>
                 INICIO
-                <span class="sr-only">(current)</span>
+                <span class='sr-only'>(current)</span>
               </a>
             </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="Agenda.html">
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Agenda.php'>
                 AGENDA
-                <span class="sr-only">(current)</span>
+                <span class='sr-only'>(current)</span>
               </a>
             </li>
-            <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="Cita.html">
+            <li class='nav-item active px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Cita.php'>
                 CITAS
               </a>
             </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="Sesion.html">
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Sesion.php'>
                 SESION
               </a>
             </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="php/cerrar_session.php">
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='cerrar_sesion.php'>
                 CERRAR SESION
               </a>
             </li>
@@ -85,7 +100,7 @@
       <span class='input-group-addon'>NOMBRE</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
+      <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre'/>
     </div>
     <div class='col-md-3'></div>
   </div>
@@ -94,7 +109,7 @@
       <span class='input-group-addon'>APELLIDO</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
+      <input type='text' class='form-control' name='apellido' value='".$buscar->getApellido()."' id='apellido' placeholder='Apellido'/>
     </div>
   <div class='col-md-3'></div>
   </div>
@@ -103,7 +118,7 @@
       <span class='input-group-addon'>CONSULTORIO</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio'/>
+        <input type='text' class='form-control' name='consultorio' value='".$cita->getConsultorio()."' id='consultorio' placeholder='Consultorio'/>
     </div>
     <div class='col-md-3'></div>
   </div>
@@ -112,7 +127,7 @@
       <span class='input-group-addon'>TELEFONO</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
+      <input type='text' class='form-control' name='telefono' value='".$buscar->getTelefono()."' id='telefono' placeholder='Telefono'/>
     </div>
   <div class='col-md-3'></div>
   </div>
@@ -121,7 +136,7 @@
       <span class='input-group-addon'>E-MAIL</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
+      <input type='text' class='form-control' name='email' value='".$buscar->getEmail()."' id='email' placeholder='E-Mail'/>
     </div>
     </div>
   <div class='row'>
@@ -129,16 +144,17 @@
       <span class='input-group-addon'>HORA/FECHA CITA</span>
     </div>
     <div class='col-md-6'>
-    <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Hora y fecha'/>
+    <input type='text' class='form-control' name='fecha' value='".$cita->getFecha()."' id='fecha' placeholder='Hora y fecha'/>
     </div>
   <div class='col-md-3'></div>
-
-
   <div class='intro-button mx-auto' style='margin-top:15px'>
-    <input type='button' value='Registrar' class='btn btn-success btn-x2' onclick="actualizar()" />
+    <input type='submit' value='Modificar' class='btn btn-success btn-x2' onclick='' />
   </div>
   <div class='intro-button mx-auto' style='margin-top:15px'>
-    <input type='button' value='Regresar' class='btn btn-success btn-x2' onclick="" />
+    <input type='button' value='Limpiar todo' class='btn btn-success btn-x2' onclick='limpiarConsCita()' />
+  </div>
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2'/><a/>
   </div>
 </form>
 
@@ -167,3 +183,10 @@ $('.list-hours li').eq(new Date().getDay()).addClass('today');
 </script>
 
 </html>
+";
+unset($cliente);//Se elimina la variable
+}//Si se crea el POST
+else{
+  header('location:/old-caitab-web');//Si no se ha llenado el formulario
+}
+?>

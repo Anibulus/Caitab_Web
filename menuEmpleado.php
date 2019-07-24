@@ -6,18 +6,6 @@ require $_SERVER['DOCUMENT_ROOT'].'/php/modelo/Empleado.php';
 */
 session_start();//Se inicia la sesion en este archivo junto a todos lo valores dados anteriormente
 if(isset($_SESSION['idEmpleado']) && isset($_SESSION["nombre"])) {//Si las variables de sesion han sido creadas, entra
-  /*
-  if(is_null($_SESSION["CuentaEmpleado"])) {
-    header("Location: /old-caitab-web/inicio_sesion.php");
-  }
-  $empleado = $_SESSION["Empleado"];
-  $cargo = (is_null($empleado)) ? "" : $empleado->getCargo();
-  $cargos_validos = array("Gerente", "Supervisor", "Contador");
-  if(!in_array($cargo, $cargos_validos)) {
-    echo "<script>alert('baia baia hdtpm')</script>";
-    header( "refresh:1;url=../../../carrito_compras.php" );
-  }
-  */
   var_dump($_SESSION);
 } else {
   header("Location: /old-caitab-web/index.html");
@@ -51,7 +39,7 @@ if(isset($_SESSION['idEmpleado']) && isset($_SESSION["nombre"])) {//Si las varia
   <body>
 
     <h1 class="site-heading text-center text-white d-none d-lg-block">
-      <span class="site-heading-upper text-primary mb-3">Dulcería</span>
+      <span class="site-heading-upper text-primary mb-3"></span>
       <span class="site-heading-lower">CAITAB</span>
     </h1>
 

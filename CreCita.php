@@ -9,8 +9,7 @@ if(isset($_SESSION['Usuario'])){
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
       <meta name='description' content=''>
       <meta name='author' content=''>
-      <!--Esta linea ayudara a la validaciones de los campos-->
-      <script type='text/javascript' src='js/cambio.js'></script>
+      <script type='text/javascript' src='js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
 
       <title>CAITAB A.C.</title>
 
@@ -24,6 +23,7 @@ if(isset($_SESSION['Usuario'])){
 
       <!-- Custom styles for this template -->
       <link href='css/business-casual.min.css' rel='stylesheet'>
+      <script type='text/javascript' src='js/cambio.js'></script>
 
     </head>
 
@@ -48,13 +48,13 @@ if(isset($_SESSION['Usuario'])){
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
-              <li class='nav-item active px-lg-4'>
+              <li class='nav-item px-lg-4'>
                 <a class='nav-link text-uppercase text-expanded' href='Agenda.php'>
                   AGENDA
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
-              <li class='nav-item px-lg-4'>
+              <li class='nav-item active px-lg-4'>
                 <a class='nav-link text-uppercase text-expanded' href='Cita.php'>
                   CITAS
                 </a>
@@ -74,77 +74,106 @@ if(isset($_SESSION['Usuario'])){
         </div>
       </nav>
 
-      <!--Seccion para formulario-->
       <section> <!--class='page-section about-heading'-->
           <div class='about-heading-content'>
             <div class='row'>
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
-                  <h2>
-                    <span class='section-heading mb-3'>Buscar por</span>
-                  </h2>
-                  <!--Formulario para iniciar la sesion-->
-                  <form id='Inicio'  method='POST' action='php/buscarCliente.php'>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='nombreB' id='nombreB' placeholder='Nombre'/>
-                      </div>
-                      <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellidoB' id='apellidoB' placeholder='Apellido'/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <center>
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
-                    </div>
-                    </center>
-                    </form>
-                  </div>
-              </div>
-            </div>
-          </div>
-      </section>
+
+  <h2>
+    <span class='section-heading mb-3'>Resultado</span>
+  </h2>
+  <form id='Inicio'  method='POST' action='php/autenticacion.php'>
+      <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>NOMBRE</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
+      </div>
+      <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>APELLIDO</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
+      </div>
+    <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>CONSULTORIO</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio'/>
+      </div>
+      <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>TELEFONO</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
+      </div>
+    <div class='col-md-3'></div>
+    </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>E-MAIL</span>
+      </div>
+      <div class='col-md-6'>
+        <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
+      </div>
+      </div>
+    <div class='row'>
+      <div class='col-md-3'>
+        <span class='input-group-addon'>HORA/FECHA CITA</span>
+      </div>
+      <div class='col-md-6'>
+      <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Hora y fecha'/>
+      </div>
+    <div class='col-md-3'></div>
 
 
-      <footer class='footer text-faded text-center py-5'>
-        <div class='container'>
-          <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
-        </div>
-      </footer>
+    <div class='intro-button mx-auto' style='margin-top:15px'>
+      <input type='submit' value='Registrar' class='btn btn-success btn-x2'/>
+    </div>
+    <div class='intro-button mx-auto' style='margin-top:15px'>
+      <a href='Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' onclick='' /><a/>
+    </div>
+  </form>
 
-      <!-- Bootstrap core JavaScript -->
-      <script src='vendor/jquery/jquery.min.js'></script>
-      <script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
+  </div>
+  </div>
+  </div>
+  </div>
+  </section>
 
-    </body>
 
-    <!-- Script to highlight the active date in the hours list -->
-    <script>
-      $('.list-hours li').eq(new Date().getDay()).addClass('today');
-    </script>
+  <footer class='footer text-faded text-center py-5'>
+  <div class='container'>
+  <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
+  </div>
+  </footer>
 
-  </html>";
+  <!-- Bootstrap core JavaScript -->
+  <script src='vendor/jquery/jquery.min.js'></script>
+  <script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
+
+  </body>
+
+  <!-- Script to highlight the active date in the hours list -->
+  <script>
+  $('.list-hours li').eq(new Date().getDay()).addClass('today');
+  </script>
+
+  </html>
+  ";
+}else{
 
 }
-else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
-}
+
 ?>
-<!-- Base de seguridad
-if(isset($_POST['usu'])){
-
-}
-else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
-}
--->

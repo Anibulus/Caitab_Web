@@ -9,8 +9,7 @@ if(isset($_SESSION['Usuario'])){
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
       <meta name='description' content=''>
       <meta name='author' content=''>
-      <!--Esta linea ayudara a la validaciones de los campos-->
-      <script type='text/javascript' src='js/cambio.js'></script>
+      <script type='text/javascript' src='js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
 
       <title>CAITAB A.C.</title>
 
@@ -48,7 +47,7 @@ if(isset($_SESSION['Usuario'])){
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
-              <li class='nav-item active px-lg-4'>
+              <li class='nav-item px-lg-4'>
                 <a class='nav-link text-uppercase text-expanded' href='Agenda.php'>
                   AGENDA
                   <span class='sr-only'>(current)</span>
@@ -59,7 +58,7 @@ if(isset($_SESSION['Usuario'])){
                   CITAS
                 </a>
               </li>
-              <li class='nav-item px-lg-4'>
+              <li class='nav-item active px-lg-4'>
                 <a class='nav-link text-uppercase text-expanded' href='Sesion.php'>
                   SESION
                 </a>
@@ -84,31 +83,44 @@ if(isset($_SESSION['Usuario'])){
                     <span class='section-heading mb-3'>Buscar por</span>
                   </h2>
                   <!--Formulario para iniciar la sesion-->
-                  <form id='Inicio'  method='POST' action='php/buscarCliente.php'>
+                  <form id='Inicio'  method='POST' action='php/buscarSesion.php'> <!--Aun no existe-->
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE</span>
+                        <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='nombreB' id='nombreB' placeholder='Nombre'/>
+                        <input type='text' class='form-control' name='id' id='id' placeholder='Nombre'/>
                       </div>
                       <div class='col-md-3'></div>
                     </div>
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO</span>
+                        <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellidoB' id='apellidoB' placeholder='Apellido'/>
+                        <input type='text' class='form-control' name='id' id='id' placeholder='Apellido'/>
+                      </div>
+                      <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>FECHA/HORA CITA</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='password' class='form-control' name='fecha' id='fecha' placeholder='Fecha y hora'/>
                       </div>
                     <div class='col-md-3'></div>
-                    </div>
-                    <center>
+
                     <div class='intro-button mx-auto' style='margin-top:15px'>
                       <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
                     </div>
-                    </center>
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <input type='button' value='Crear' class='btn btn-success btn-x2' />
+                    </div>
+
+  <!--        Aqui va un submit para realizar la accion de buscar        -->
                     </form>
+
                   </div>
               </div>
             </div>
@@ -133,18 +145,9 @@ if(isset($_SESSION['Usuario'])){
       $('.list-hours li').eq(new Date().getDay()).addClass('today');
     </script>
 
-  </html>";
-
+  </html>
+";
 }
 else{
   header('location:/old-caitab-web');//Si no se ha llenado el formulario
 }
-?>
-<!-- Base de seguridad
-if(isset($_POST['usu'])){
-
-}
-else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
-}
--->
