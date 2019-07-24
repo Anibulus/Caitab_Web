@@ -2,10 +2,17 @@
 session_start();
 if(isset($_POST['nombreB'])){
 //requiere del archvo empleado, y empleado a su vez de conexion.php
-require_once 'clases/Cliente.php';//Requiere del objeto Cliente
-$cliente = new Cliente($_POST['nombreB'],$_POST['apellidoB'],$_POST['fechaB']);//verificar que se cree de esa manera
-$buscar = $cliente -> consultarCita($_POST['nombreB'],$_POST['apellidoB'],$_POST['fechaB']);
-var_dump($buscar);
+require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
+$cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
+$buscar = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
+require_once 'modelo/Cita.php';
+$cita=new Cita(0,0,0,0,0);
+//var_dumb($cita);
+$cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
+//var_dumb($cita);
+//
+//var_dump($cliente);
+//var_dump($buscar);
 echo "
 <!DOCTYPE html>
 <html lang='en'>
@@ -18,7 +25,6 @@ echo "
 
     <title>CAITAB A.C.</title>
 
-    <!-- Bootstrap core CSS -->
     <link href='img/logoCaitab' rel='icon'>
     <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
@@ -28,6 +34,7 @@ echo "
 
     <!-- Custom styles for this template -->
     <link href='css/business-casual.min.css' rel='stylesheet'>
+    <script type='text/javascript' src='js/cambio.js'></script>
 
   </head>
 
@@ -40,30 +47,36 @@ echo "
 
         <nav class='navbar navbar-expand-lg navbar-dark py-lg-4' id='mainNav'>
       <div class='container'>
-        <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'>Start Bootstrap</a>
+        <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'></a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
           <span class='navbar-toggler-icon'></span>
         </button>
         <div class='collapse navbar-collapse' id='navbarResponsive'>
           <ul class='navbar-nav mx-auto'>
-            <li class='nav-item active px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='Agenda.html'>
-                AGENDA
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/IniEmp.html'>
+                INICIO
                 <span class='sr-only'>(current)</span>
               </a>
             </li>
             <li class='nav-item px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='Cita.html'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Agenda.php'>
+                AGENDA
+                <span class='sr-only'>(current)</span>
+              </a>
+            </li>
+            <li class='nav-item active px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Cita.php'>
                 CITAS
               </a>
             </li>
             <li class='nav-item px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='products.html'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Sesion.php'>
                 SESION
               </a>
             </li>
             <li class='nav-item px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='store.html'>
+              <a class='nav-link text-uppercase text-expanded' href='cerrar_sesion.php'>
                 CERRAR SESION
               </a>
             </li>
@@ -72,113 +85,105 @@ echo "
       </div>
     </nav>
 
-    <!--Seccion para formulario-->
     <section> <!--class='page-section about-heading'-->
         <div class='about-heading-content'>
           <div class='row'>
             <div class='col-xl-9 col-lg-10 mx-auto'>
               <div class='bg-faded rounded p-5'>
-                <!--Formulario para iniciar la sesion-->
-                ";
-                if($buscar==true){
-                  //Se mostraran los datos del cliente
-                  //Aqui lo que hace falta es sacar la informacion del objeto cliente y dejar que sea visible para las personas
-                  //PENDIENTE
-                  echo "<h2>
-                    <span class='section-heading mb-3'>Resultado</span>
-                  </h2>
-                      <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE</span>
-                      </div>
-                      <div class='col-md-6'>";
-                      //Aqui se deja el nombre
-                      //echo $cliente->getNombre();
-                      //Aun no esta muy claro
-                      echo"
-                      </div>
-                      <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellido' id='apellidos' placeholder='Apellido'/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>DIRECCION</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='direccion' id='direccion' placeholder='Direccion'/>
-                      </div>
-                      <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>TELEFONO</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>TEL. DE EMERGENCIA</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='telefonoEme' id='telefonoEme' placeholder='Telefono de emergencia'/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>E-MAIL</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
-                      </div>
-                    <div class='col-md-3'></div>";
-                }
-                else{
-                  echo "Ocurrio un error al Consultar o No se encontro a la persona";
-                }//Esto muestra la informacion del cliente
-                echo "
-                  <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <a href='/Agenda.html'><button value='Regresar' class='btn btn-success btn-x2' /><a/>
-                  </div>
 
-                </div>
-            </div>
-          </div>
-        </div>
-    </section>
+<h2>
+  <span class='section-heading mb-3'>Resultado</span>
+</h2>
+<form id='Inicio'  method='POST' action='php/autenticacion.php'>
+    <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>NOMBRE</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre'/>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>APELLIDO</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='apellido' value='".$buscar->getApellido()."' id='apellido' placeholder='Apellido'/>
+    </div>
+  <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>CONSULTORIO</span>
+    </div>
+    <div class='col-md-6'>
+        <input type='text' class='form-control' name='consultorio' value='".$cita->getConsultorio()."' id='consultorio' placeholder='Consultorio'/>
+    </div>
+    <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>TELEFONO</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='telefono' value='".$buscar->getTelefono()."' id='telefono' placeholder='Telefono'/>
+    </div>
+  <div class='col-md-3'></div>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>E-MAIL</span>
+    </div>
+    <div class='col-md-6'>
+      <input type='text' class='form-control' name='email' value='".$buscar->getEmail()."' id='email' placeholder='E-Mail'/>
+    </div>
+    </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <span class='input-group-addon'>HORA/FECHA CITA</span>
+    </div>
+    <div class='col-md-6'>
+    <input type='text' class='form-control' name='fecha' value='".$cita->getFecha()."' id='fecha' placeholder='Hora y fecha'/>
+    </div>
+  <div class='col-md-3'></div>
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <input type='submit' value='Modificar' class='btn btn-success btn-x2' onclick='' />
+  </div>
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <input type='button' value='Limpiar todo' class='btn btn-success btn-x2' onclick='limpiarConsCita()' />
+  </div>
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2'/><a/>
+  </div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+</section>
 
 
-    <footer class='footer text-faded text-center py-5'>
-      <div class='container'>
-        <p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
-      </div>
-    </footer>
+<footer class='footer text-faded text-center py-5'>
+<div class='container'>
+<p class='m-0 small'>Copyright &copy; ELSSE 2018</p>
+</div>
+</footer>
 
-    <!-- Bootstrap core JavaScript -->
-    <script src='vendor/jquery/jquery.min.js'></script>
-    <script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
+<!-- Bootstrap core JavaScript -->
+<script src='vendor/jquery/jquery.min.js'></script>
+<script src='vendor/bootstrap/js/bootstrap.bundle.min.js'></script>
 
-  </body>
+</body>
 
-  <!-- Script to highlight the active date in the hours list -->
-  <script>
-    $('.list-hours li').eq(new Date().getDay()).addClass('today');
-  </script>
+<!-- Script to highlight the active date in the hours list -->
+<script>
+$('.list-hours li').eq(new Date().getDay()).addClass('today');
+</script>
 
 </html>
 ";
-
 unset($cliente);//Se elimina la variable
 }//Si se crea el POST
 else{

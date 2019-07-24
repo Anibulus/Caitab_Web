@@ -96,5 +96,9 @@ ADD CONSTRAINT FK_EmpEC FOREIGN KEY (ID_Emp) REFERENCES Empleado(ID_Emp);
 /*Registros*/
 
 -- insert into Empleado(Nombre_E,Apellidos_E,Domicilio_E,Fecha_Nac_E,Esp_pue,Turno,Tel_E,Tel_Eme_E,Estatus_E,Email_E) values(
+--Empleado y usuario
 insert into Usuario(Usuario, Contrasenia, Tipo_Usuario) values ('anibulus','kagamine','E');
 insert into Empleado(ID_Emp,Nombre_E,Apellidos_E,Domicilio_E,Fecha_Nac_E,Esp_pue,Turno,Tel_E,Tel_Eme_E,Estatus_E,Email_E,ID_Usu) values(null,'Luis Antonio','Preza Padilla','Arquimides 262', '1999-06-13', 'Programador','M','3318891000','3318891000','A','anibulusnn@gmail.com',1);
+--Cliente
+insert into Cliente(ID_Cli,Nombre_C,Apellidos_C,Domicilio_C,Fecha_Nac_C,Tel_C,Tel_Eme_C,Estatus_C,Email_C,ID_Usu) values (null,'Jorge Alberto','Preza Padilla','Godinez Loear 23','2007-08-27','3319902321','3319902321','A','jorge_alberto@gmail.com',1);
+insert into cita(ID_Cita,ID_Emp,ID_Cli,Fecha_Hora,Consultorio) values (null, 1,1,'2019-07-23',2);

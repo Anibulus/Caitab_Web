@@ -2,7 +2,7 @@
 //require_once $_SERVER['DOCUMENT_ROOT'].'/php/conexion/base_datos.php';
 require_once 'conexion.php';
 
-class Empleado {
+class Cliente {
   //Caracteristicas de la clase
     private $idCliente;
     private $nombre;
@@ -16,8 +16,8 @@ class Empleado {
     private $idUsuario;
     private $fechaCita;
 //Constructor de la clase
-    public function __construct($idE,$nom,$app,$dom,$fec,$tel,$telE,$est,$ema,$idU) {
-        $this->idEmpleado = $idE;
+    public function __construct($idC,$nom,$app,$dom,$fec,$tel,$telE,$est,$ema,$idU) {
+        $this->idCliente = $idC;
         $this->nombre = $nom;
         $this->apellido = $app;
         $this->domicilio = $dom;
@@ -31,7 +31,7 @@ class Empleado {
 //Constructor de prueba
 //Aqui estan los det de la clase
     public function getId() {
-        return $this->idEmpleado;
+        return $this->idCliente;
     }
 
     public function getNombre() {
@@ -76,7 +76,7 @@ class Empleado {
 
 //Aqui estan los set de la clase
     public function setId($idE) {
-        $this->idEmpleado=$idE;
+        $this->idCliente=$idE;
     }
 
     public function setNombre($nom) {
@@ -122,23 +122,23 @@ class Empleado {
 
     public static function consultaIndividual($id, $nombre, $apellido) {
       $conexion = new Conexion();
-      $consulta = $conexion-> prepare("select * from Cliente where ID_Cliente =:id or Nombre_C =:nom or Apellidos_C =:app;");
+      $consulta = $conexion-> prepare("select * from Cliente where ID_Cli =:id or Nombre_C =:nom or Apellidos_C =:app;");
       $consulta->bindParam(':id', $id);
       $consulta->bindParam(':nom', $nombre);
       $consulta->bindParam(':app', $apellido);
       $consulta->execute();
       $registro = $consulta->fetch();//La variable registro almacena lo que halla devuelto la consulta
-      var_dump($registro);//Esta linea se puede quitar
+      //var_dump($registro);//Esta linea se puede quitar
       if($registro)
   		{
-  			$resultado = new self($registro['ID_Cliente'], $registro['Nombre_C'], $registro['Apellidos_C'], $registro['Domicilio_C'],$registro['Fecha_Nac_C'], $registro['Telefono_C'],$registro['Telefono_Eme_C'], $registro['Estatus_C'], $registro['Email_C'], $registro['ID_Usu']);
+  			$resultado = new self($registro['ID_Cli'], $registro['Nombre_C'], $registro['Apellidos_C'], $registro['Domicilio_C'],$registro['Fecha_Nac_C'], $registro['Tel_C'],$registro['Tel_Eme_C'], $registro['Estatus_C'], $registro['Email_C'], $registro['ID_Usu']);
   		}
   		else
   		{
   			$resultado = false;
   		}//Fin de validacion en caso de encontrar a un registro
   		unset($conexion);//Destruye la variable conexion
-      var_dump($resultado);//Muestra lo que contiene la variable
+      //var_dump($resultado);//Muestra lo que contiene la variable
   		return $resultado;//Retorna el valor que contiene la variable
     }//Fin de la consulta individual
 
@@ -165,6 +165,6 @@ class Empleado {
       var_dump($resultado);//Muestra lo que contiene la variable
   		return $resultado;//Retorna el valor que contiene la variable
     }//Fin de la consulta individual
-
+}//Fin de la clase cliente
 //Ver si se anadiran mas funciones para cliente
 ?>
