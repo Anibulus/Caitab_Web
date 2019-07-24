@@ -1,13 +1,13 @@
 <?php
 session_start();
-if(isset($_POST['Usuario'])){
+if(isset($_POST['consultorio'])){
   require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
-  $cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
-  $cliente = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
+  $cliente = new Cliente(0,$_POST['nombre'],$_POST['apellido'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
+  $cliente = $cliente -> consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
   require_once 'modelo/Cita.php';
-  $cita=new Cita(0,0,0,0,0);
+  $cita=new Cita(0,$_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
   //var_dumb($cita);
-  $cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
+  $cita=$cita->nuevaCita($_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
   echo "
   <!DOCTYPE html>
   <html lang='en'>
@@ -16,21 +16,21 @@ if(isset($_POST['Usuario'])){
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
       <meta name='description' content=''>
       <meta name='author' content=''>
-      <script type='text/javascript' src='js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
+      <script type='text/javascript' src='/old-caitab-web/js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
 
       <title>CAITAB A.C.</title>
 
       <!-- Bootstrap core CSS -->
-      <link href='img/logoCaitab' rel='icon'>
-      <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
+      <link href='/old-caitab-web/img/logoCaitab' rel='icon'>
+      <link href='/old-caitab-web/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
       <!-- Custom fonts for this template -->
       <link href='https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet'>
       <link href='https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i' rel='stylesheet'>
 
       <!-- Custom styles for this template -->
-      <link href='css/business-casual.min.css' rel='stylesheet'>
-      <script type='text/javascript' src='js/cambio.js'></script>
+      <link href='/old-caitab-web/css/business-casual.min.css' rel='stylesheet'>
+      <script type='text/javascript' src='/old-caitab-web/js/cambio.js'></script>
 
     </head>
 
@@ -117,8 +117,10 @@ if(isset($_POST['Usuario'])){
 
   </html>
   ";
-
-}else{
-  location("location:/old-caitab-web");
+unset($cliente);
+unset($cita);
+}
+else{
+  header("location:/old-caitab-web");
 }
 ?>

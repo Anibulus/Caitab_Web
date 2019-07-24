@@ -116,7 +116,7 @@ if(isset($_SESSION['Usuario'])){
         <span class='input-group-addon'>HORA/FECHA CITA</span>
       </div>
       <div class='col-md-6'>
-      <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Hora y fecha'/>
+      <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Fecha'/>
       </div>
     <div class='col-md-3'></div>
 
