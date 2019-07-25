@@ -83,13 +83,13 @@ if(isset($_SESSION['Usuario'])){
                     <span class='section-heading mb-3'>Buscar por</span>
                   </h2>
                   <!--Formulario para iniciar la sesion-->
-                  <form id='Inicio'  method='POST' action='php/buscarSesion.php'> <!--Aun no existe-->
+                  <form id='Inicio'  method='POST' action='php/buscarSesion.php'>
                     <div class='row'>
                       <div class='col-md-3'>
                         <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='id' id='id' placeholder='Nombre'/>
+                        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre' required/>
                       </div>
                       <div class='col-md-3'></div>
                     </div>
@@ -98,16 +98,16 @@ if(isset($_SESSION['Usuario'])){
                         <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='id' id='id' placeholder='Apellido'/>
+                        <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
                       </div>
                       <div class='col-md-3'></div>
                     </div>
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>FECHA/HORA CITA</span>
+                        <span class='input-group-addon'>FECHA CITA</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='password' class='form-control' name='fecha' id='fecha' placeholder='Fecha y hora'/>
+                        <input type='date' class='form-control' name='fecha' id='fecha' placeholder='Fecha de Cita' required/>
                       </div>
                     <div class='col-md-3'></div>
 
@@ -115,12 +115,9 @@ if(isset($_SESSION['Usuario'])){
                       <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
                     </div>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='button' value='Crear' class='btn btn-success btn-x2' />
+                      <a href='CreSes.php'><input type='button' value='Crear' class='btn btn-success btn-x2' /><a/>
                     </div>
-
-  <!--        Aqui va un submit para realizar la accion de buscar        -->
                     </form>
-
                   </div>
               </div>
             </div>
