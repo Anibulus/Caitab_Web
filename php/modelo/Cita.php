@@ -69,7 +69,7 @@ class Cita{
       $resultado = false;
     }//Fin de validacion en caso de encontrar a un registro
     unset($conexion);//Destruye la variable conexion
-    var_dump($resultado);//Muestra lo que contiene la variable
+    //var_dump($resultado);//Muestra lo que contiene la variable
     return $resultado;//Retorna el valor que contiene la variable
   }//Fin de la funcion de consulta
 
