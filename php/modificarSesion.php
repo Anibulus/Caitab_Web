@@ -2,11 +2,9 @@
 session_start();
 if(isset($_POST['nombre'])){
   require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
-  $cliente = new Cliente(0,$_POST['nombre'],$_POST['apellido'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
-  $cliente = $cliente -> consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
 
   require_once 'modelo/Expediente.php';
-  $expediente=new Expediente(0,$_SESSION['idEmpleado'],$cliente->getId(),$_SESSION['idCita'],'Hora','Hora','Descipcion','Conclusion');
+  $expediente=new Expediente(0,$_SESSION['idEmpleado'],0,$_SESSION['idCita'],'Hora','Hora','Descipcion','Conclusion');
   $expediente=$expediente->modificarExpediente($_SESSION['idCita'],$_POST['desc'],$_POST['con']);
 
   echo"
@@ -88,11 +86,14 @@ if(isset($_POST['nombre'])){
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
                   <h2>
-                    <span class='section-heading mb-3'>Se ha modificado correctamente la Sesion de ".$cliente->getNombre()."</span>
+                    <span class='section-heading mb-3'>Se ha modificado correctamente la Sesion de ".$_POST['nombre']."</span>
                   </h2>
                   </div>
               </div>
             </div>
+          </div>
+          <div class='intro-button mx-auto' style='margin-top:15px'>
+            <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
           </div>
       </section>
 
@@ -116,6 +117,8 @@ if(isset($_POST['nombre'])){
 
   </html>
   ";
+  unset($expediente);
+  unset($cliente);
 
 }else{
   header('location:/old-caitab-web/Sesion.php');

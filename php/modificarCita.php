@@ -8,11 +8,11 @@ if(isset($_POST['consultorio'])){
   $cita=new Cita(0,0,0,0,0);
   $modificar=$cita->modificarCita($_SESSION['idCita'],$_SESSION['idEmpleado'],$cliente->getId(),$_POST['fecha'],$_POST['consultorio']);
   //var_dumb($modificar);
-  var_dump($cliente->getId());
+  //var_dump($cliente->getId());
   //var_dumb($_SESSION['idEmpleado']);
   //var_dumb($_SESSION['idCita']);
-  var_dump($_POST['fecha']);
-  var_dump($_POST['consultorio']);
+  //var_dump($_POST['fecha']);
+  //var_dump($_POST['consultorio']);
   echo "
   <!DOCTYPE html>
   <html lang='en'>
@@ -103,6 +103,9 @@ if(isset($_POST['consultorio'])){
                 </h2>";
               }
   echo "
+  <div class='intro-button mx-auto' style='margin-top:15px'>
+    <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
+  </div>
   </div>
   </div>
   </div>
@@ -131,7 +134,8 @@ if(isset($_POST['consultorio'])){
   ";
   unset($cliente);//Se elimina la variable
   unset($cita);
+  unset($modificar);
 }else{
-  header('location:/old-caitab-web');
+  header('location:/old-caitab-web/Cita.php');
 }
 ?>

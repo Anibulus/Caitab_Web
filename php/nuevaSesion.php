@@ -4,15 +4,16 @@ if(isset($_POST['con'])){
 require_once 'modelo/Cliente.php';
 $cliente=new Cliente (0,$_POST['nombre'],$_POST['apellido'],'domicilio','fecha','telefono','telefonoEme','A','email',0);
 $cliente=$cliente->consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
-
-require_once 'modelo/Cita.php';
-$cita=new Cita(0,0,0,0,0);
-$cita=$cita->consultarCita($cliente->getId(),$_POST['fecha'],$_SESSION['idEmpleado']);
-
-
-require_once 'modelo/Expediente.php';
-$expediente=new Expediente(0,$_SESSION['idEmpleado'],$cliente->getId(),$cita->getIDCita(),$_POST['horaIni'],$_POST['horaFin'],$_POST['desc'],$_POST['con']);
-$insercion=$expediente->nuevoExpediente($_SESSION['idEmpleado'],$cliente->getId(),$cita->getIDCita(),$_POST['horaIni'],$_POST['horaFin'],$_POST['desc'],$_POST['con']);
+if($cliente){
+  require_once 'modelo/Cita.php';
+  $cita=new Cita(0,0,0,0,0);
+  $cita=$cita->consultarCita($cliente->getId(),$_POST['fecha'],$_SESSION['idEmpleado']);
+  if($cita){
+    require_once 'modelo/Expediente.php';
+    $expediente=new Expediente(0,$_SESSION['idEmpleado'],$cliente->getId(),$cita->getIDCita(),$_POST['horaIni'],$_POST['horaFin'],$_POST['desc'],$_POST['con']);
+    $expediente=$expediente->nuevoExpediente($_SESSION['idEmpleado'],$cliente->getId(),$cita->getIDCita(),$_POST['horaIni'],$_POST['horaFin'],$_POST['desc'],$_POST['con']);
+  }//Fin del if cita
+}//Fin del If ccliente
   echo"
 <!DOCTYPE html>
 <html lang='en'>
@@ -91,19 +92,40 @@ $insercion=$expediente->nuevoExpediente($_SESSION['idEmpleado'],$cliente->getId(
           <div class='row'>
             <div class='col-xl-9 col-lg-10 mx-auto'>
               <div class='bg-faded rounded p-5'>";
-              if($insercion){
+
+              if($cliente){
+                if($cita){
+                  if($expediente){
+                    echo"
+                    <h2>
+                      <span class='section-heading mb-3'>Se ha registrado su Sesion correctamente con ".$cliente->getNombre()."</span>
+                    </h2>
+                    ";
+                  }
+                  else{
+                    echo"
+                    <h2>
+                      <span class='section-heading mb-3'>No se ha podido registrar su Sesion</span>
+                    </h2>
+                    ";
+                  }//fin de if expediente
+                }//fin de if cita
+                else{
+                  echo"
+                  <h2>
+                    <span class='section-heading mb-3'>No se ha guardado. No hay una cita asigana para ese dia.</span>
+                  </h2>
+                  ";
+                }
+              }//Fin de if cliente
+              else{
                 echo"
                 <h2>
-                  <span class='section-heading mb-3'>Se ha registrado su Sesion correctamente con ".$cliente->getNombre()."</span>
-                </h2>
-                ";
-              }else{
-                echo"
-                <h2>
-                  <span class='section-heading mb-3'>No se ha podido registrar su Sesion</span>
+                  <span class='section-heading mb-3'>La persona no esta registrada.</span>
                 </h2>
                 ";
               }
+
                 echo"
                   <div class='intro-button mx-auto' style='margin-top:15px'>
                     <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
@@ -134,7 +156,10 @@ $insercion=$expediente->nuevoExpediente($_SESSION['idEmpleado'],$cliente->getId(
   </script>
 
 </html>";
+unset($cliente);
+unset($cita);
+unset($expediente);
 }else{
-  header('location:/old-caitab-web');
+  header('location:/old-caitab-web/Sesion.php');
 }
 ?>

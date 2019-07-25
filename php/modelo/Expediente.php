@@ -24,7 +24,7 @@ class Expediente{
   }//fin de el Constructor
 
   public function getIdExp() {
-      return $this->ID_EXp;
+      return $this->ID_Exp;
   }
 
   public function getIdEmp() {
@@ -56,8 +56,8 @@ class Expediente{
   }
 
 //Aqui estan los set de la clase
-  public function setIdExp($ID_EXp) {
-      $this->ID_EXp=$ID_EXp;
+  public function setIdExp($ID_Exp) {
+      $this->ID_Exp=$ID_Exp;
   }
 
   public function setIdEmp($ID_Emp) {

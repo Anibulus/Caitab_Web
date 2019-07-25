@@ -20,7 +20,7 @@ if($empleado){
     $_SESSION['idUsuario']=$empleado->getIdUsuario();
     $_SESSION['Usuario']=$empleado->getUsuario();
     //Fecha nacimiento
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
     //header("location:/old-caitab-web/menuEmpleado.php");
     header("location:/old-caitab-web/IniEmp.html");
   }//Si se entrontro el registro

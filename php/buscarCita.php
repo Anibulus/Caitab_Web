@@ -5,13 +5,17 @@ if(isset($_POST['nombreB'])){
 require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
 $cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
 $buscar = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
-require_once 'modelo/Cita.php';
-$cita=new Cita(0,0,0,0,0);
-$cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
-//Se otorga el numero de la cita en la variable de sesion para utilizarla globalmente sin necesidad de seguir consultando
-if($cita!=null){
-$_SESSION['idCita']=$cita->getIDCita();
-}
+
+if($buscar){
+  require_once 'modelo/Cita.php';
+  $cita=new Cita(0,0,0,0,0);
+  $cita=$cita->consultarCita($buscar->getId(),$_POST['fechaB'],$_SESSION['idEmpleado']);
+  //Se otorga el numero de la cita en la variable de sesion para utilizarla globalmente sin necesidad de seguir consultando
+  if($cita){
+    $_SESSION['idCita']=$cita->getIDCita();
+  } //Fin de if cita
+}//Fin de if cliente
+
 //var_dump($_SESSION);
 //var_dumb($cita);
 //var_dump($cliente);
@@ -93,77 +97,90 @@ echo "
           <div class='row'>
             <div class='col-xl-9 col-lg-10 mx-auto'>
               <div class='bg-faded rounded p-5'>";
-              if($cita!=null){
+            if($buscar){
+              if($cita){
                 echo"
-<h2>
-  <span class='section-heading mb-3'>Resultado</span>
-</h2>
-<form id='Inicio'  method='POST' action='modificarCita.php'>
-    <div class='row'>
-    <div class='col-md-3'>
-      <span class='input-group-addon'>NOMBRE</span>
-    </div>
-    <div class='col-md-6'>
-      <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre' readonly />
-    </div>
-    <div class='col-md-3'></div>
-  </div>
-  <div class='row'>
-    <div class='col-md-3'>
-      <span class='input-group-addon'>APELLIDO</span>
-    </div>
-    <div class='col-md-6'>
-      <input type='text' class='form-control' name='apellido' value='".$buscar->getApellido()."' id='apellido' placeholder='Apellido' readonly />
-    </div>
-  <div class='col-md-3'></div>
-  </div>
-  <div class='row'>
-    <div class='col-md-3'>
-      <span class='input-group-addon'>CONSULTORIO</span>
-    </div>
-    <div class='col-md-6'>
-        <input type='number' class='form-control' name='consultorio' value='".$cita->getConsultorio()."' id='consultorio' placeholder='Consultorio'/>
-    </div>
-    <div class='col-md-3'></div>
-  </div>
-  <div class='row'>
-    <div class='col-md-3'>
-      <span class='input-group-addon'>TELEFONO</span>
-    </div>
-    <div class='col-md-6'>
-      <input type='tel' class='form-control' name='telefono' value='".$buscar->getTelefono()."' id='telefono' placeholder='Telefono' readonly/>
-    </div>
-  <div class='col-md-3'></div>
-  </div>
-  <div class='row'>
-    <div class='col-md-3'>
-      <span class='input-group-addon'>E-MAIL</span>
-    </div>
-    <div class='col-md-6'>
-      <input type='text' class='form-control' name='email' value='".$buscar->getEmail()."' id='email' placeholder='E-Mail' readonly/>
-    </div>
-    </div>
-  <div class='row'>
-    <div class='col-md-3'>
-      <span class='input-group-addon'>HORA/FECHA CITA</span>
-    </div>
-    <div class='col-md-6'>
-    <input type='text' class='form-control' name='fecha' value='".$cita->getFecha()."' id='fecha' placeholder='Fecha' maxlength=10/>
-    </div>
-  <div class='col-md-3'></div>
-  <div class='intro-button mx-auto' style='margin-top:15px'>
-    <input type='submit' value='Modificar' class='btn btn-success btn-x2' onclick='' />
-  </div>
-  <div class='intro-button mx-auto' style='margin-top:15px'>
-    <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2'/><a/>
-  </div>
-</form>
-";
-}else{
-  echo"
-  <span class='section-heading mb-3'>No tienene citas pendientes con ".$cliente->getNombre()." ".$cliente->getApellido()."</span>"
-;
-}
+                  <h2>
+                    <span class='section-heading mb-3'>Resultado</span>
+                  </h2>
+                  <form id='Inicio'  method='POST' action='modificarCita.php'>
+                      <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>NOMBRE</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre' readonly />
+                      </div>
+                      <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>APELLIDO</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='text' class='form-control' name='apellido' value='".$buscar->getApellido()."' id='apellido' placeholder='Apellido' readonly />
+                      </div>
+                    <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>CONSULTORIO</span>
+                      </div>
+                      <div class='col-md-6'>
+                          <input type='number' class='form-control' name='consultorio' value='".$cita->getConsultorio()."' id='consultorio' min=1 placeholder='Consultorio'/>
+                      </div>
+                      <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>TELEFONO</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='tel' class='form-control' name='telefono' value='".$buscar->getTelefono()."' id='telefono' placeholder='Telefono' readonly/>
+                      </div>
+                    <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>E-MAIL</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='text' class='form-control' name='email' value='".$buscar->getEmail()."' id='email' placeholder='E-Mail' readonly/>
+                      </div>
+                      </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>HORA/FECHA CITA</span>
+                      </div>
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='fecha' value='".$cita->getFecha()."' id='fecha' placeholder='Fecha' maxlength=10/>
+                      </div>
+                    <div class='col-md-3'></div>
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <input type='submit' value='Modificar' class='btn btn-success btn-x2' onclick='' />
+                    </div>
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2'/><a/>
+                    </div>
+                  </form>
+                  ";
+                  }else{
+                    echo"
+                    <span class='section-heading mb-3'>No tienene citas pendientes con ".$cliente->getNombre()." ".$cliente->getApellido()." ese dia.</span>
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
+                    </div>"
+                  ;
+                  }
+            }else{
+              echo "
+              <h2>
+                <span class='section-heading mb-3'>Esta persona no esta registrada.</span>
+                <div class='intro-button mx-auto' style='margin-top:15px'>
+                  <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
+                </div>
+              </h2>";
+            }
 echo"
 </div>
 </div>
@@ -192,9 +209,10 @@ $('.list-hours li').eq(new Date().getDay()).addClass('today');
 </html>
 ";
 unset($cliente);//Se elimina la variable
+unset($buscar);
 unset($cita);
 }//Si se crea el POST
 else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
+  header('location:/old-caitab-web/Cita.php');//Si no se ha llenado el formulario
 }
 ?>

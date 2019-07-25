@@ -156,7 +156,7 @@ echo "
                     <div class='col-md-3'></div>";
                 }
                 else{
-                  echo "Ocurrio un error al Consultar o No se encontro a la persona";
+                  echo "No se encontro a la persona";
                 }//Esto muestra la informacion del cliente
                 echo "
                   <div class='intro-button mx-auto' style='margin-top:15px'>
@@ -191,8 +191,9 @@ echo "
 ";
 
 unset($cliente);//Se elimina la variable
+unset($buscar);
 }//Si se crea el POST
 else{
-  header('location:/old-caitab-web/Sesion.php');//Si no se ha llenado el formulario
+  header('location:/old-caitab-web/Agenda.php');//Si no se ha llenado el formulario
 }
 ?>

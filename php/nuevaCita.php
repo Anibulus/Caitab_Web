@@ -95,11 +95,14 @@ if(isset($_POST['consultorio'])){
                 }else{//En caso contrario
                   echo"
                   <h2>
-                    <span class='section-heading mb-3'>Su cita se ha registrado coerrectante</span>
+                    <span class='section-heading mb-3'>Su cita se ha registrado correctante</span>
                   </h2>
                   ";
                 }
 echo"
+<div class='intro-button mx-auto' style='margin-top:15px'>
+  <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
+</div>
   </div>
   </div>
   </div>
@@ -130,6 +133,6 @@ unset($cliente);
 unset($cita);
 }
 else{
-  header("location:/old-caitab-web");
+  header("location:/old-caitab-web/Cita.php");
 }
 ?>
