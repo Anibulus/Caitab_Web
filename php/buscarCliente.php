@@ -3,9 +3,9 @@ session_start();
 if(isset($_POST['nombreB'])){
 //requiere del archvo empleado, y empleado a su vez de conexion.php
 require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
-$cliente = new Cliente($_POST['idB'], $_POST['nombreB'],$_POST['apellidoB']);//verificar que se cree de esa manera
-$buscar = $cliente -> consultaIndividual($_POST['idB'], $_POST['nombreB'],$_POST['apellidoB']);
-var_dump($buscar);
+$cliente = new Cliente(0,$_POST['nombreB'],$_POST['apellidoB'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
+$buscar = $cliente -> consultaIndividual(null,$_POST['nombreB'],$_POST['apellidoB']);
+//var_dump($buscar);
 echo "
 <!DOCTYPE html>
 <html lang='en'>
@@ -46,6 +46,12 @@ echo "
         </button>
         <div class='collapse navbar-collapse' id='navbarResponsive'>
           <ul class='navbar-nav mx-auto'>
+          <li class='nav-item px-lg-4'>
+            <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/IniEmp.html'>
+              INICIO
+              <span class='sr-only'>(current)</span>
+            </a>
+          </li>
             <li class='nav-item active px-lg-4'>
               <a class='nav-link text-uppercase text-expanded' href='Agenda.html'>
                 AGENDA
@@ -93,7 +99,7 @@ echo "
                       </div>
                       <div class='col-md-6'>";
                       //Aqui se deja el nombre
-                      //echo $cliente->getNombre();
+                      echo $cliente->getNombre();
                       //Aun no esta muy claro
                       echo"
                       </div>
@@ -103,8 +109,9 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>APELLIDO</span>
                       </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellido' id='apellidos' placeholder='Apellido'/>
+                      <div class='col-md-6'>";
+                        echo $cliente->getApellido();
+                        echo"
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -112,8 +119,9 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>DIRECCION</span>
                       </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='direccion' id='direccion' placeholder='Direccion'/>
+                      <div class='col-md-6'>";
+                        echo $buscar->getDomicilio();
+                        echo"
                       </div>
                       <div class='col-md-3'></div>
                     </div>
@@ -121,8 +129,9 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>TELEFONO</span>
                       </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='telefono' id='telefono' placeholder='Telefono'/>
+                      <div class='col-md-6'>";
+                        echo $buscar->getTelefono();
+                        echo"
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -130,8 +139,9 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>TEL. DE EMERGENCIA</span>
                       </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='telefonoEme' id='telefonoEme' placeholder='Telefono de emergencia'/>
+                      <div class='col-md-6'>";
+                        echo $buscar->getTelefonoEmergencia();
+                        echo"
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -139,8 +149,9 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>E-MAIL</span>
                       </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='email' id='email' placeholder='E-Mail'/>
+                      <div class='col-md-6'>";
+                        echo $buscar->getEmail();
+                        echo"
                       </div>
                     <div class='col-md-3'></div>";
                 }
@@ -149,7 +160,7 @@ echo "
                 }//Esto muestra la informacion del cliente
                 echo "
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <a href='/Agenda.html'><button value='Regresar' class='btn btn-success btn-x2' /><a/>
+                    <a href='/old-caitab-web/agenda.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                   </div>
 
                 </div>
