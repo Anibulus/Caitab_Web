@@ -161,8 +161,8 @@ echo "
 ";
 }else{
   echo"
-  <span class='section-heading mb-3'>No tienene citas pendientes con".$cliente->getNombre()." ".$cliente->getApellido.""</span>
-  ";
+  <span class='section-heading mb-3'>No tienene citas pendientes con ".$cliente->getNombre()." ".$cliente->getApellido()."</span>"
+;
 }
 echo"
 </div>
