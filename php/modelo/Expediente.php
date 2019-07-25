@@ -110,6 +110,24 @@ class Expediente{
     return $resultado;//Retorna el valor que contiene la variable
   }//Fin de la funcion nuevo expediente
 
+  public function modificarExpediente($idCita,$Descripcion,$Conclusion){
+    $resultado=false;
+    $conexion = new Conexion();
+    $consulta = $conexion-> prepare("update expediente set Descripcion=:Descripcion ,Conclusion=:Conclusion where ID_Cita=:idCita;");
+    $consulta->bindParam(':Descripcion', $Descripcion);
+    $consulta->bindParam(':Conclusion', $Conclusion);
+    $consulta->bindParam(':idCita', $idCita);
+    $consulta->execute();
+    if($consulta->rowCount())
+    {
+      $resultado = true;
+    }
+    //Fin de validacion en caso de encontrar a un registro
+    unset($conexion);//Destruye la variable conexion
+    //var_dump($resultado);//Muestra lo que contiene la variable
+    return $resultado;//Retorna el valor que contiene la variable
+  }//Fin de la funcion nuevo expediente
+
   public function consultarSesion($idCita){
     $conexion = new Conexion();
     $consulta = $conexion-> prepare("select * from expediente where ID_Cita =:idC ;");
