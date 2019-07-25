@@ -1,6 +1,16 @@
 <?php
 session_start();
 if(isset($_POST['nombre'])){
+  require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
+  $cliente = new Cliente(0,$_POST['nombre'],$_POST['apellido'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
+  $cliente = $cliente -> consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
+  require_once 'modelo/Cita.php';
+  $cita=new Cita(0,0,0,0,0);
+  $cita=$cita->consultarCita($cliente->getId(),$_POST['fecha'],$_SESSION['idEmpleado']);
+
+  require_once 'modelo/Expediente.php';
+  $expediente=new Expediente(0,$_SESSION['idEmpleado'],$cliente->getId(),$cita->getIDCita(),'Hora','Hora','Descipcion','Conclusion');
+  $expediente=$expediente->consultarSesion($cita->getIDCita());
   echo"
   <!DOCTYPE html>
   <html lang='en'>
@@ -9,20 +19,20 @@ if(isset($_POST['nombre'])){
       <meta name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no'>
       <meta name='description' content=''>
       <meta name='author' content=''>
-      <script type='text/javascript' src='js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
+      <script type='text/javascript' src='/old-caitab-web/js/validarCampos.js'></script><!--Esta linea ayudara a la validaciones de los campos-->
 
       <title>CAITAB A.C.</title>
 
       <!-- Bootstrap core CSS -->
-      <link href='img/logoCaitab' rel='icon'>
-      <link href='vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
+      <link href='/old-caitab-web/img/logoCaitab' rel='icon'>
+      <link href='/old-caitab-web/vendor/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
 
       <!-- Custom fonts for this template -->
       <link href='https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i' rel='stylesheet'>
       <link href='https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i' rel='stylesheet'>
 
       <!-- Custom styles for this template -->
-      <link href='css/business-casual.min.css' rel='stylesheet'>
+      <link href='/old-caitab-web/css/business-casual.min.css' rel='stylesheet'>
 
     </head>
 
@@ -42,29 +52,29 @@ if(isset($_POST['nombre'])){
           <div class='collapse navbar-collapse' id='navbarResponsive'>
             <ul class='navbar-nav mx-auto'>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='IniEmp.html'>
+                <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/IniEmp.html'>
                   INICIO
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='Agenda.html'>
+                <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Agenda.html'>
                   AGENDA
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='Cita.html'>
+                <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Cita.html'>
                   CITAS
                 </a>
               </li>
               <li class='nav-item active px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='Sesion.html'>
+                <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Sesion.html'>
                   SESION
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='php/cerrar_session.php'>
+                <a class='nav-link text-uppercase text-expanded' href='cerrar_session.php'>
                   CERRAR SESION
                 </a>
               </li>
@@ -79,10 +89,6 @@ if(isset($_POST['nombre'])){
             <div class='row'>
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
-
-  <!--        Aqui va un submit para realizar la accion de buscar        -->
-                    </form>
-
                   <h2>
                     <span class='section-heading mb-3'>Resultado</span>
                   </h2>
@@ -92,7 +98,7 @@ if(isset($_POST['nombre'])){
                         <span class='input-group-addon'>NOMBRE</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
+                        <input type='text' class='form-control' name='nombre' id='nombre' value='".$cliente->getNombre()."' placeholder='Nombre' readonly/>
                       </div>
                       <div class='col-md-3'></div>
                     </div>
@@ -101,7 +107,7 @@ if(isset($_POST['nombre'])){
                         <span class='input-group-addon'>APELLIDO</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='password' class='form-control' name='appellido' id='apellido' placeholder='Apellido'/>
+                        <input type='text' class='form-control' name='appellido' id='apellido' value='".$cliente->getApellido()."' placeholder='Apellido' readonly/>
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -110,7 +116,7 @@ if(isset($_POST['nombre'])){
                         <span class='input-group-addon'>HORA DE INICIO</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='horaIni' id='horaIni' placeholder='Hora inicio'/>
+                        <input type='time' class='form-control' name='horaIni' id='horaIni' value='".$expediente->getHoraIni()."' placeholder='Hora inicio' readonly/>
                       </div>
                       <div class='col-md-3'></div>
                     </div>
@@ -119,7 +125,7 @@ if(isset($_POST['nombre'])){
                         <span class='input-group-addon'>HORA DE FIN</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='password' class='form-control' name='horaFin' id='horaFin' placeholder='Hora fin'/>
+                        <input type='time' class='form-control' name='horaFin' id='horaFin' value='".$expediente->getHoraFin()."' placeholder='Hora fin' readonly/>
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -128,7 +134,7 @@ if(isset($_POST['nombre'])){
                         <span class='input-group-addon'>DESCRIPCION</span>
                       </div>
                       <div class='col-md-6'>
-                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='desc' id='desc' placeholder='Descripcion'></textarea>
+                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='desc' id='desc' placeholder='Descripcion' required>".$expediente->getDescripcion()."</textarea>
                       </div>
                       </div>
                     <div class='row'>
@@ -136,22 +142,15 @@ if(isset($_POST['nombre'])){
                         <span class='input-group-addon'>CONCLUSION</span>
                       </div>
                       <div class='col-md-6'>
-                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='con' id='con' placeholder='Conclusion'></textarea>
+                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='con' id='con' placeholder='Conclusion' required>".$expediente->getConclusion()."</textarea>
                       </div>
                     <div class='col-md-3'></div>
 
-
                     <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='submit' value='Registrar' class='btn btn-success btn-x2' />
+                      <input type='submit' value='Modificar' class='btn btn-success btn-x2' />
                     </div>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='button' value='Modificar' class='btn btn-success btn-x2' />
-                    </div>
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='button' value='Limpiar todo' class='btn btn-success btn-x2' />
-                    </div>
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='button' value='Regresar' class='btn btn-success btn-x2' />
+                      <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                     </div>
                   </form>
 

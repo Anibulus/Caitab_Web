@@ -110,5 +110,25 @@ class Expediente{
     return $resultado;//Retorna el valor que contiene la variable
   }//Fin de la funcion nuevo expediente
 
+  public function consultarSesion($idCita){
+    $conexion = new Conexion();
+    $consulta = $conexion-> prepare("select * from expediente where ID_Cita =:idC ;");
+    $consulta->bindParam(':idC', $idCita);
+    $consulta->execute();
+    $registro = $consulta->fetch();//La variable registro almacena lo que halla devuelto la consulta
+    //var_dump($registro);//Esta linea se puede quitar
+    if($registro)
+    {
+      $resultado = new self($registro['ID_Exp'], $registro['ID_Emp'], $registro['ID_Cli'], $registro['ID_Cita'], $registro['Hora_Inicio'],$registro['Hora_Fin'],$registro['Descripcion'],$registro['Conclusion']);
+    }
+    else
+    {
+      $resultado = false;
+    }//Fin de validacion en caso de encontrar a un registro
+    unset($conexion);//Destruye la variable conexion
+    var_dump($resultado);//Muestra lo que contiene la variable
+    return $resultado;//Retorna el valor que contiene la variable
+  }//Fin de la funcion de consulta
+
 }//Fin de la clase expediente
 ?>
