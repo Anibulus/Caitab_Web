@@ -4,14 +4,11 @@ if(isset($_POST['nombre'])){
   require_once 'modelo/Cliente.php';//Requiere del objeto Cliente
   $cliente = new Cliente(0,$_POST['nombre'],$_POST['apellido'],'Domicilio','Fecha','Tel','TelE','Est','Email',0);//verificar que se cree de esa manera
   $cliente = $cliente -> consultaIndividual(null,$_POST['nombre'],$_POST['apellido']);
-  require_once 'modelo/Cita.php';
-  $cita=new Cita(0,0,0,0,0);
-  $cita=$cita->consultarCita($cliente->getId(),$_POST['fecha'],$_SESSION['idEmpleado']);
 
   require_once 'modelo/Expediente.php';
-  $expediente=new Expediente(0,$_SESSION['idEmpleado'],$cliente->getId(),$cita->getIDCita(),'Hora','Hora','Descipcion','Conclusion');
-  $expediente=$expediente->consultarSesion($cita->getIDCita());
-  $_SESSION['idCita']=$cita->getIDCita();
+  $expediente=new Expediente(0,$_SESSION['idEmpleado'],$cliente->getId(),$_SESSION['idCita'],'Hora','Hora','Descipcion','Conclusion');
+  $expediente=$expediente->modificarExpediente($_SESSION['idCita'],$_POST['desc'],$_POST['con']);
+
   echo"
   <!DOCTYPE html>
   <html lang='en'>
@@ -91,70 +88,8 @@ if(isset($_POST['nombre'])){
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
                   <h2>
-                    <span class='section-heading mb-3'>Resultado</span>
+                    <span class='section-heading mb-3'>Se ha modificado correctamente la Sesion de ".$cliente->getNombre()."</span>
                   </h2>
-                  <form id='Inicio'  method='POST' action='modificarSesion.php'>
-                      <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='nombre' id='nombre' value='".$cliente->getNombre()."' placeholder='Nombre' readonly/>
-                      </div>
-                      <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellido' id='apellido' value='".$cliente->getApellido()."' placeholder='Apellido' readonly/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>HORA DE INICIO</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='time' class='form-control' name='horaIni' id='horaIni' value='".$expediente->getHoraIni()."' placeholder='Hora inicio' readonly/>
-                      </div>
-                      <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>HORA DE FIN</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <input type='time' class='form-control' name='horaFin' id='horaFin' value='".$expediente->getHoraFin()."' placeholder='Hora fin' readonly/>
-                      </div>
-                    <div class='col-md-3'></div>
-                    </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>DESCRIPCION</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='desc' id='desc' placeholder='Descripcion' required>".$expediente->getDescripcion()."</textarea>
-                      </div>
-                      </div>
-                    <div class='row'>
-                      <div class='col-md-3'>
-                        <span class='input-group-addon'>CONCLUSION</span>
-                      </div>
-                      <div class='col-md-6'>
-                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='con' id='con' placeholder='Conclusion' required>".$expediente->getConclusion()."</textarea>
-                      </div>
-                    <div class='col-md-3'></div>
-
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='submit' value='Modificar' class='btn btn-success btn-x2' />
-                    </div>
-                    <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
-                    </div>
-                  </form>
-
                   </div>
               </div>
             </div>
@@ -181,7 +116,12 @@ if(isset($_POST['nombre'])){
 
   </html>
   ";
+
 }else{
   header('location:/old-caitab-web/Sesion.php');
 }
+
+
+
+
 ?>
