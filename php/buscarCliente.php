@@ -40,7 +40,7 @@ echo "
 
         <nav class='navbar navbar-expand-lg navbar-dark py-lg-4' id='mainNav'>
       <div class='container'>
-        <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'>Start Bootstrap</a>
+        <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'></a>
         <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
           <span class='navbar-toggler-icon'></span>
         </button>
@@ -53,23 +53,23 @@ echo "
             </a>
           </li>
             <li class='nav-item active px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='Agenda.html'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Agenda.php'>
                 AGENDA
                 <span class='sr-only'>(current)</span>
               </a>
             </li>
             <li class='nav-item px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='Cita.html'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Cita.php'>
                 CITAS
               </a>
             </li>
             <li class='nav-item px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='products.html'>
+              <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Sesion.php'>
                 SESION
               </a>
             </li>
             <li class='nav-item px-lg-4'>
-              <a class='nav-link text-uppercase text-expanded' href='store.html'>
+              <a class='nav-link text-uppercase text-expanded' href='cerrar_sesion.php'>
                 CERRAR SESION
               </a>
             </li>
@@ -86,7 +86,7 @@ echo "
               <div class='bg-faded rounded p-5'>
                 <!--Formulario para iniciar la sesion-->
                 ";
-                if($buscar==true){
+                if($buscar){
                   //Se mostraran los datos del cliente
                   //Aqui lo que hace falta es sacar la informacion del objeto cliente y dejar que sea visible para las personas
                   //PENDIENTE
@@ -99,7 +99,7 @@ echo "
                       </div>
                       <div class='col-md-6'>";
                       //Aqui se deja el nombre
-                      echo $cliente->getNombre();
+                      echo $buscar->getNombre();
                       //Aun no esta muy claro
                       echo"
                       </div>
@@ -110,7 +110,7 @@ echo "
                         <span class='input-group-addon'>APELLIDO</span>
                       </div>
                       <div class='col-md-6'>";
-                        echo $cliente->getApellido();
+                        echo $buscar->getApellido();
                         echo"
                       </div>
                     <div class='col-md-3'></div>
@@ -193,6 +193,6 @@ echo "
 unset($cliente);//Se elimina la variable
 }//Si se crea el POST
 else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
+  header('location:/old-caitab-web/Sesion.php');//Si no se ha llenado el formulario
 }
 ?>

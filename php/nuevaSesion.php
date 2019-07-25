@@ -106,7 +106,7 @@ $insercion=$expediente->nuevoExpediente($_SESSION['idEmpleado'],$cliente->getId(
               }
                 echo"
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <a href='Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
+                    <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                   </div>
 
                 </div>
