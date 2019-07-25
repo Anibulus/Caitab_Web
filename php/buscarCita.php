@@ -104,7 +104,7 @@ echo "
       <span class='input-group-addon'>NOMBRE</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre'/>
+      <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre' readonly />
     </div>
     <div class='col-md-3'></div>
   </div>
@@ -113,7 +113,7 @@ echo "
       <span class='input-group-addon'>APELLIDO</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='apellido' value='".$buscar->getApellido()."' id='apellido' placeholder='Apellido'/>
+      <input type='text' class='form-control' name='apellido' value='".$buscar->getApellido()."' id='apellido' placeholder='Apellido' readonly />
     </div>
   <div class='col-md-3'></div>
   </div>
@@ -122,7 +122,7 @@ echo "
       <span class='input-group-addon'>CONSULTORIO</span>
     </div>
     <div class='col-md-6'>
-        <input type='text' class='form-control' name='consultorio' value='".$cita->getConsultorio()."' id='consultorio' placeholder='Consultorio'/>
+        <input type='number' class='form-control' name='consultorio' value='".$cita->getConsultorio()."' id='consultorio' placeholder='Consultorio'/>
     </div>
     <div class='col-md-3'></div>
   </div>
@@ -131,7 +131,7 @@ echo "
       <span class='input-group-addon'>TELEFONO</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='telefono' value='".$buscar->getTelefono()."' id='telefono' placeholder='Telefono'/>
+      <input type='tel' class='form-control' name='telefono' value='".$buscar->getTelefono()."' id='telefono' placeholder='Telefono' readonly/>
     </div>
   <div class='col-md-3'></div>
   </div>
@@ -140,7 +140,7 @@ echo "
       <span class='input-group-addon'>E-MAIL</span>
     </div>
     <div class='col-md-6'>
-      <input type='text' class='form-control' name='email' value='".$buscar->getEmail()."' id='email' placeholder='E-Mail'/>
+      <input type='text' class='form-control' name='email' value='".$buscar->getEmail()."' id='email' placeholder='E-Mail' readonly/>
     </div>
     </div>
   <div class='row'>
@@ -148,7 +148,7 @@ echo "
       <span class='input-group-addon'>HORA/FECHA CITA</span>
     </div>
     <div class='col-md-6'>
-    <input type='text' class='form-control' name='fecha' value='".$cita->getFecha()."' id='fecha' placeholder='Hora y fecha'/>
+    <input type='text' class='form-control' name='fecha' value='".$cita->getFecha()."' id='fecha' placeholder='Fecha' maxlength=10/>
     </div>
   <div class='col-md-3'></div>
   <div class='intro-button mx-auto' style='margin-top:15px'>
@@ -161,7 +161,7 @@ echo "
 ";
 }else{
   echo"
-  <span class='section-heading mb-3'>No tienene citas pendientes con".$cliente->getNombre()." ".$cliente->getApellido.""</span>
+  <span class='section-heading mb-3'>No tienene citas pendientes con".$cliente->getNombre()." ".$cliente->getApellido."</span>
   ";
 }
 echo"

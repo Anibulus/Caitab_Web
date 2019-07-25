@@ -1,3 +1,7 @@
+<?php
+session_start();
+if(isset($_SESSION['Usuario'])){
+  echo"
 <!DOCTYPE html>
 <html lang='en'>
   <head>
@@ -29,38 +33,38 @@
       <span class='site-heading-lower'>CAITAB A.C.</span>
     </h1>
 
-        <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none" href="#">Start Bootstrap</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+        <nav class='navbar navbar-expand-lg navbar-dark py-lg-4' id='mainNav'>
+      <div class='container'>
+        <a class='navbar-brand text-uppercase text-expanded font-weight-bold d-lg-none' href='#'>Start Bootstrap</a>
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarResponsive' aria-controls='navbarResponsive' aria-expanded='false' aria-label='Toggle navigation'>
+          <span class='navbar-toggler-icon'></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav mx-auto">
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="IniEmp.html">
+        <div class='collapse navbar-collapse' id='navbarResponsive'>
+          <ul class='navbar-nav mx-auto'>
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='IniEmp.html'>
                 INICIO
-                <span class="sr-only">(current)</span>
+                <span class='sr-only'>(current)</span>
               </a>
             </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="Agenda.html">
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='Agenda.php'>
                 AGENDA
-                <span class="sr-only">(current)</span>
+                <span class='sr-only'>(current)</span>
               </a>
             </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="Cita.html">
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='Cita.php'>
                 CITAS
               </a>
             </li>
-            <li class="nav-item active px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="Sesion.html">
+            <li class='nav-item active px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='Sesion.php'>
                 SESION
               </a>
             </li>
-            <li class="nav-item px-lg-4">
-              <a class="nav-link text-uppercase text-expanded" href="php/cerrar_session.php">
+            <li class='nav-item px-lg-4'>
+              <a class='nav-link text-uppercase text-expanded' href='php/cerrar_session.php'>
                 CERRAR SESION
               </a>
             </li>
@@ -76,13 +80,10 @@
             <div class='col-xl-9 col-lg-10 mx-auto'>
               <div class='bg-faded rounded p-5'>
 
-<!--        Aqui va un submit para realizar la accion de buscar        -->
-                  </form>
-
                 <h2>
                   <span class='section-heading mb-3'>Resultado</span>
                 </h2>
-                <form id='Inicio'  method='POST' action='php/autenticacion.php'>
+                <form id='Inicio'  method='POST' action='php/nuevaSesion.php'>
                     <div class='row'>
                     <div class='col-md-3'>
                       <span class='input-group-addon'>NOMBRE</span>
@@ -97,16 +98,25 @@
                       <span class='input-group-addon'>APELLIDO</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='password' class='form-control' name='appellido' id='apellido' placeholder='Apellido'/>
+                      <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
                     </div>
                   <div class='col-md-3'></div>
                   </div>
+                  <div class='row'>
+                  <div class='col-md-3'>
+                    <span class='input-group-addon'>Fecha</span>
+                  </div>
+                  <div class='col-md-6'>
+                    <input type='date' class='form-control' name='fecha' id='fecha' placeholder='Fecha'/>
+                  </div>
+                  <div class='col-md-3'></div>
+                </div>
                   <div class='row'>
                     <div class='col-md-3'>
                       <span class='input-group-addon'>HORA DE INICIO</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='text' class='form-control' name='horaIni' id='horaIni' placeholder='Hora inicio'/>
+                      <input type='time' class='form-control' name='horaIni' id='horaIni' placeholder='Hora inicio'/>
                     </div>
                     <div class='col-md-3'></div>
                   </div>
@@ -115,7 +125,7 @@
                       <span class='input-group-addon'>HORA DE FIN</span>
                     </div>
                     <div class='col-md-6'>
-                      <input type='password' class='form-control' name='horaFin' id='horaFin' placeholder='Hora fin'/>
+                      <input type='time' class='form-control' name='horaFin' id='horaFin' placeholder='Hora fin'/>
                     </div>
                   <div class='col-md-3'></div>
                   </div>
@@ -124,6 +134,7 @@
                       <span class='input-group-addon'>DESCRIPCION</span>
                     </div>
                     <div class='col-md-6'>
+                    <!--<input type='textarea' rows = '10' cols= '40' class='form-control' name='desc' id='desc' placeholder='Descripcion' />-->
                       <textarea rows = '10' cols= '40' type='text' class='form-control' name='desc' id='desc' placeholder='Descripcion'></textarea>
                     </div>
                     </div>
@@ -141,7 +152,7 @@
                     <input type='submit' value='Registrar' class='btn btn-success btn-x2' />
                   </div>
                   <div class='intro-button mx-auto' style='margin-top:15px'>
-                    <input type='button' value='Regresar' class='btn btn-success btn-x2' />
+                    <a href='Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                   </div>
                 </form>
 
@@ -169,4 +180,8 @@
     $('.list-hours li').eq(new Date().getDay()).addClass('today');
   </script>
 
-</html>
+</html>";
+}else{
+  header("location:/old-caitab-web");
+}
+?>

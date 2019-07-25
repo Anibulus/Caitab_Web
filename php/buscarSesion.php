@@ -1,7 +1,7 @@
 <?php
 session_start();
-if(isset($_SESSION['Usuario'])){
-  echo "
+if(isset($_POST['nombre'])){
+  echo"
   <!DOCTYPE html>
   <html lang='en'>
     <head>
@@ -48,23 +48,23 @@ if(isset($_SESSION['Usuario'])){
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='Agenda.php'>
+                <a class='nav-link text-uppercase text-expanded' href='Agenda.html'>
                   AGENDA
                   <span class='sr-only'>(current)</span>
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='Cita.php'>
+                <a class='nav-link text-uppercase text-expanded' href='Cita.html'>
                   CITAS
                 </a>
               </li>
               <li class='nav-item active px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='Sesion.php'>
+                <a class='nav-link text-uppercase text-expanded' href='Sesion.html'>
                   SESION
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='php/cerrar_sesion.php'>
+                <a class='nav-link text-uppercase text-expanded' href='php/cerrar_session.php'>
                   CERRAR SESION
                 </a>
               </li>
@@ -79,14 +79,17 @@ if(isset($_SESSION['Usuario'])){
             <div class='row'>
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
+
+  <!--        Aqui va un submit para realizar la accion de buscar        -->
+                    </form>
+
                   <h2>
-                    <span class='section-heading mb-3'>Buscar por</span>
+                    <span class='section-heading mb-3'>Resultado</span>
                   </h2>
-                  <!--Formulario para iniciar la sesion-->
-                  <form id='Inicio'  method='POST' action='php/buscarSesion.php'>
-                    <div class='row'>
+                  <form id='Inicio'  method='POST' action='php/autenticacion.php'>
+                      <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>NOMBRE DE CLIENTE</span>
+                        <span class='input-group-addon'>NOMBRE</span>
                       </div>
                       <div class='col-md-6'>
                         <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
@@ -95,29 +98,63 @@ if(isset($_SESSION['Usuario'])){
                     </div>
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>APELLIDO DE CLIENTE</span>
+                        <span class='input-group-addon'>APELLIDO</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='text' class='form-control' name='apellido' id='apellido' placeholder='Apellido'/>
+                        <input type='password' class='form-control' name='appellido' id='apellido' placeholder='Apellido'/>
+                      </div>
+                    <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>HORA DE INICIO</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <input type='text' class='form-control' name='horaIni' id='horaIni' placeholder='Hora inicio'/>
                       </div>
                       <div class='col-md-3'></div>
                     </div>
                     <div class='row'>
                       <div class='col-md-3'>
-                        <span class='input-group-addon'>FECHA/HORA CITA</span>
+                        <span class='input-group-addon'>HORA DE FIN</span>
                       </div>
                       <div class='col-md-6'>
-                        <input type='password' class='form-control' name='fecha' id='fecha' placeholder='Fecha y hora'/>
+                        <input type='password' class='form-control' name='horaFin' id='horaFin' placeholder='Hora fin'/>
+                      </div>
+                    <div class='col-md-3'></div>
+                    </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>DESCRIPCION</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='desc' id='desc' placeholder='Descripcion'></textarea>
+                      </div>
+                      </div>
+                    <div class='row'>
+                      <div class='col-md-3'>
+                        <span class='input-group-addon'>CONCLUSION</span>
+                      </div>
+                      <div class='col-md-6'>
+                        <textarea rows = '10' cols= '40' type='text' class='form-control' name='con' id='con' placeholder='Conclusion'></textarea>
                       </div>
                     <div class='col-md-3'></div>
 
+
                     <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <input type='submit' value='Consultar' class='btn btn-success btn-x2' />
+                      <input type='submit' value='Registrar' class='btn btn-success btn-x2' />
                     </div>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
-                      <a href='CreSes.php'><input type='button' value='Crear' class='btn btn-success btn-x2' /><a/>
+                      <input type='button' value='Modificar' class='btn btn-success btn-x2' />
                     </div>
-                    </form>
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <input type='button' value='Limpiar todo' class='btn btn-success btn-x2' />
+                    </div>
+                    <div class='intro-button mx-auto' style='margin-top:15px'>
+                      <input type='button' value='Regresar' class='btn btn-success btn-x2' />
+                    </div>
+                  </form>
+
                   </div>
               </div>
             </div>
@@ -143,8 +180,8 @@ if(isset($_SESSION['Usuario'])){
     </script>
 
   </html>
-";
+  ";
+}else{
+  header('location:/old-caitab-web');
 }
-else{
-  header('location:/old-caitab-web');//Si no se ha llenado el formulario
-}
+?>

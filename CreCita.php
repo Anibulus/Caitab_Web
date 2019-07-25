@@ -89,7 +89,7 @@ if(isset($_SESSION['Usuario'])){
         <span class='input-group-addon'>NOMBRE</span>
       </div>
       <div class='col-md-6'>
-        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre'/>
+        <input type='text' class='form-control' name='nombre' id='nombre' placeholder='Nombre' required/>
       </div>
       <div class='col-md-3'></div>
     </div>
@@ -107,16 +107,16 @@ if(isset($_SESSION['Usuario'])){
         <span class='input-group-addon'>CONSULTORIO</span>
       </div>
       <div class='col-md-6'>
-        <input type='text' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio'/>
+        <input type='number' class='form-control' name='consultorio' id='consultorio' placeholder='Consultorio' min=1 required/>
       </div>
       <div class='col-md-3'></div>
     </div>
     <div class='row'>
       <div class='col-md-3'>
-        <span class='input-group-addon'>HORA/FECHA CITA</span>
+        <span class='input-group-addon'>FECHA CITA</span>
       </div>
       <div class='col-md-6'>
-      <input type='text' class='form-control' name='fecha' id='fecha' placeholder='Fecha'/>
+      <input type='date' class='form-control' name='fecha' id='fecha' placeholder='Fecha' required/>
       </div>
     <div class='col-md-3'></div>
 

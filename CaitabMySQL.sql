@@ -102,3 +102,4 @@ insert into Empleado(ID_Emp,Nombre_E,Apellidos_E,Domicilio_E,Fecha_Nac_E,Esp_pue
 --Cliente
 insert into Cliente(ID_Cli,Nombre_C,Apellidos_C,Domicilio_C,Fecha_Nac_C,Tel_C,Tel_Eme_C,Estatus_C,Email_C,ID_Usu) values (null,'Jorge Alberto','Preza Padilla','Godinez Loear 23','2007-08-27','3319902321','3319902321','A','jorge_alberto@gmail.com',1);
 insert into cita(ID_Cita,ID_Emp,ID_Cli,Fecha_Hora,Consultorio) values (null, 1,1,'2019-07-23',2);
+insert into expediente(ID_Exp,ID_Emp,ID_Cli,ID_Cita,Hora_Inicio,Hora_Fin,Descripcion,Conclusion) values (null,1,1,1,"8:00","9:30","Esta es una prueba","Y funciono");
