@@ -97,11 +97,8 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>NOMBRE</span>
                       </div>
-                      <div class='col-md-6'>";
-                      //Aqui se deja el nombre
-                      echo $buscar->getNombre();
-                      //Aun no esta muy claro
-                      echo"
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='nombre' value='".$buscar->getNombre()."' id='nombre' placeholder='Nombre' readonly />
                       </div>
                       <div class='col-md-3'></div>
                     </div>
@@ -109,9 +106,8 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>APELLIDO</span>
                       </div>
-                      <div class='col-md-6'>";
-                        echo $buscar->getApellido();
-                        echo"
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='nombre' value='".$buscar->getApellido()."' id='nombre' placeholder='Nombre' readonly />
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -119,9 +115,8 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>DIRECCION</span>
                       </div>
-                      <div class='col-md-6'>";
-                        echo $buscar->getDomicilio();
-                        echo"
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='nombre' value='".$buscar->getDomicilio()."' id='nombre' placeholder='Nombre' readonly />
                       </div>
                       <div class='col-md-3'></div>
                     </div>
@@ -129,9 +124,8 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>TELEFONO</span>
                       </div>
-                      <div class='col-md-6'>";
-                        echo $buscar->getTelefono();
-                        echo"
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='nombre' value='".$buscar->getTelefono()."' id='nombre' placeholder='Nombre' readonly />
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -139,9 +133,8 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>TEL. DE EMERGENCIA</span>
                       </div>
-                      <div class='col-md-6'>";
-                        echo $buscar->getTelefonoEmergencia();
-                        echo"
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='nombre' value='".$buscar->getTelefonoEmergencia()."' id='nombre' placeholder='Nombre' readonly />
                       </div>
                     <div class='col-md-3'></div>
                     </div>
@@ -149,9 +142,8 @@ echo "
                       <div class='col-md-3'>
                         <span class='input-group-addon'>E-MAIL</span>
                       </div>
-                      <div class='col-md-6'>";
-                        echo $buscar->getEmail();
-                        echo"
+                      <div class='col-md-6'>
+                      <input type='text' class='form-control' name='nombre' value='".$buscar->getEmail()."' id='nombre' placeholder='Nombre' readonly />
                       </div>
                     <div class='col-md-3'></div>";
                 }
