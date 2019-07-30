@@ -56,13 +56,13 @@ if($cliente){
           <ul class='navbar-nav mx-auto'>
             <li class='nav-item px-lg-4'>
               <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/IniEmp.html'>
-                INICIO
+                PAGINA PRINCIPAL
                 <span class='sr-only'>(current)</span>
               </a>
             </li>
             <li class='nav-item px-lg-4'>
               <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Agenda.php'>
-                AGENDA
+                AGENDA PACIENTES
                 <span class='sr-only'>(current)</span>
               </a>
             </li>
@@ -73,7 +73,7 @@ if($cliente){
             </li>
             <li class='nav-item active px-lg-4'>
               <a class='nav-link text-uppercase text-expanded' href='/old-caitab-web/Sesion.php'>
-                SESION
+                SESIONES
               </a>
             </li>
             <li class='nav-item px-lg-4'>
