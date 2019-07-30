@@ -70,7 +70,7 @@ if(isset($_POST['nombre'])){
                 </a>
               </li>
               <li class='nav-item px-lg-4'>
-                <a class='nav-link text-uppercase text-expanded' href='cerrar_session.php'>
+                <a class='nav-link text-uppercase text-expanded' href='cerrar_sesion.php'>
                   CERRAR SESION
                 </a>
               </li>
