@@ -167,7 +167,7 @@ if(isset($_POST['nombre'])){
                       </form>";
                     }//Fin de
                     else{
-                      echo "<span class='section-heading mb-3'>Usted no ha tenido sesion ese dia con la persona</span>
+                      echo "<span class='section-heading mb-3'>Usted no ha tenido sesión ese día con la persona.</span>
                       <div class='intro-button mx-auto' style='margin-top:15px'>
                         <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                       </div>
@@ -175,7 +175,7 @@ if(isset($_POST['nombre'])){
                     }
                   } //Fin del segundo si en cita
                   else{
-                    echo "<span class='section-heading mb-3'>No hubo cita asignada para ese dia</span>
+                    echo "<span class='section-heading mb-3'>No hubo cita asignada para ese día.</span>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
                       <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                     </div>
@@ -183,7 +183,7 @@ if(isset($_POST['nombre'])){
                   }
                 }//Fin del primer si cliente
                 else{
-                  echo "<span class='section-heading mb-3'>Esta persona no esta registrada como cliente</span>
+                  echo "<span class='section-heading mb-3'>Esta persona no está registrada como cliente.</span>
                   <div class='intro-button mx-auto' style='margin-top:15px'>
                     <a href='/old-caitab-web/Sesion.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                   </div>

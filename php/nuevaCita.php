@@ -89,13 +89,13 @@ if(isset($_POST['consultorio'])){
                 if($cita){//Si regresa true, es decir se inserto correctamente
                   echo"
                   <h2>
-                    <span class='section-heading mb-3'>Su cita se ha registrado coerrectante</span>
+                    <span class='section-heading mb-3'>Su cita se ha registrado correctante</span>
                   </h2>
                   ";
                 }else{//En caso contrario
                   echo"
                   <h2>
-                    <span class='section-heading mb-3'>Su cita se ha registrado correctante</span>
+                    <span class='section-heading mb-3'>Error al insertar la cita</span>
                   </h2>
                   ";
                 }

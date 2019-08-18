@@ -86,7 +86,7 @@ if(isset($_POST['nombre'])){
               <div class='col-xl-9 col-lg-10 mx-auto'>
                 <div class='bg-faded rounded p-5'>
                   <h2>
-                    <span class='section-heading mb-3'>Se ha modificado correctamente la Sesion de ".$_POST['nombre']."</span>
+                    <span class='section-heading mb-3'>Se ha modificado correctamente la Sesión de ".$_POST['nombre']."</span>
                   </h2>
                   </div>
               </div>

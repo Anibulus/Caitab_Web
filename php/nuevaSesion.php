@@ -98,14 +98,14 @@ if($cliente){
                   if($expediente){
                     echo"
                     <h2>
-                      <span class='section-heading mb-3'>Se ha registrado su Sesion correctamente con ".$cliente->getNombre()."</span>
+                      <span class='section-heading mb-3'>Se ha registrado su Sesión correctamente con ".$cliente->getNombre()."</span>
                     </h2>
                     ";
                   }
                   else{
                     echo"
                     <h2>
-                      <span class='section-heading mb-3'>No se ha podido registrar su Sesion</span>
+                      <span class='section-heading mb-3'>No se ha podido registrar su Sesión</span>
                     </h2>
                     ";
                   }//fin de if expediente
@@ -113,7 +113,7 @@ if($cliente){
                 else{
                   echo"
                   <h2>
-                    <span class='section-heading mb-3'>No se ha guardado. No hay una cita asigana para ese dia.</span>
+                    <span class='section-heading mb-3'>No se ha guardado. No hay una cita asignada para ese día.</span>
                   </h2>
                   ";
                 }

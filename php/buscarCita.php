@@ -166,7 +166,7 @@ echo "
                   ";
                   }else{
                     echo"
-                    <span class='section-heading mb-3'>No tienene citas pendientes con ".$cliente->getNombre()." ".$cliente->getApellido()." ese dia.</span>
+                    <span class='section-heading mb-3'>No tiene citas pendientes con ".$cliente->getNombre()." ".$cliente->getApellido()." ese dia.</span>
                     <div class='intro-button mx-auto' style='margin-top:15px'>
                       <a href='/old-caitab-web/Cita.php'><input type='button' value='Regresar' class='btn btn-success btn-x2' /><a/>
                     </div>"

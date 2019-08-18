@@ -93,7 +93,7 @@ if(isset($_POST['consultorio'])){
               if($modificar){
                 echo"
                 <h2>
-                  <span class='section-heading mb-3'>Se ha modificado correctamente el registro </span>
+                  <span class='section-heading mb-3'>Se ha modificado correctamente el registro. </span>
                 </h2>";
               }
               else{
